@@ -44,7 +44,7 @@ class VModificarAccion{
             <head></head>
             <body>
                 <h2>Formulario de modificacion de la acción:</h2>
-                <form action="../controler/CAccion.php" method="post">
+                <form action="./CAccion.php" method="post">
 <?php
         echo "<input type='hidden' name='idAccion' value='$idAccion'/>";
 ?>

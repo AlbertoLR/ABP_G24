@@ -6,7 +6,7 @@
  */
 
 function conexionBD(){
-    $mysqli = new mysqli("localhost", 'admin', 'admin' , 'ProyectoABP'); //host,user,passUser,BD
+    $mysqli = new mysqli("localhost", 'root', 'iu' , 'ABP'); //host,user,passUser,BD
     	
     if ($mysqli->connect_errno) {
         include './MESSAGE_View.php';

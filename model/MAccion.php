@@ -24,7 +24,7 @@ class MAccion {
     function insert(){
         if($this->nombreAc<>""){ //el campo nombre no esta vacio
             $sql="SELECT * FROM Accion WHERE nombreAc='$this->nombreAc'";
-            $resultado= $this->mysqli->query($sql);
+            $resultado=$this->mysqli->query($sql);
             if ($resultado->num_rows==0) { //comprobamos q no exita ya una acción con ese nombre
                 $sql = "INSERT INTO Accion (nombreAc) VALUES ('$this->nombreAc')";
                 $this->mysqli->query($sql);

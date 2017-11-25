@@ -28,7 +28,7 @@ include '../view/MESSAGE_View.php';
             break;
     
         case 'baja':
-            if(!isset($_REQUEST['idControlador'])){
+            if(!isset($_REQUEST['idAccion'])){
                 $selectAll=new MAccion("","");
                 $listaAcciones=$selectAll->select();
                 new VBajaAccion($listaAcciones);
@@ -83,5 +83,4 @@ include '../view/MESSAGE_View.php';
             }
             break;
     }
-    
 ?>

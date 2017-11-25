@@ -22,7 +22,7 @@ class VAltaAccion{
                         <input type="text" name="nombreAc" size="30"/>
                     </div>
                     <div>
-                        <button type="submit" name="action" value="Alta">Enviar</button>
+                        <button type="submit" name="action" value="alta">Enviar</button>
                         <button type="reset" name="reset" value="Borrar">Borrar</button>
                     </div>
                 </form>

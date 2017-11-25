@@ -24,7 +24,7 @@ class MControlador {
     function insert(){
         if($this->nombreCt<>""){ //el campo nombre no esta vacio
             $sql="SELECT * FROM Controlador WHERE nombreCt='$this->nombreCt'";
-            $resultado= $this->mysqli->query($sql);
+            $resultado=$this->mysqli->query($sql);
             if ($resultado->num_rows==0) { //comprobamos q no exita ya un ct con ese nombre
                 $sql = "INSERT INTO Controlador (nombreCt) VALUES ('$this->nombreCt')";
                 $this->mysqli->query($sql);

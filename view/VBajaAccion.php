@@ -38,7 +38,7 @@ class VBajaAccion{
 <?php
     }
     
-    static function solicitarConfirmacion($controladorBorrar){
+    static function solicitarConfirmacion($accionBorrar){
 ?>
         <html>
             <head></head>
