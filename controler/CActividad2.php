@@ -12,6 +12,9 @@ include '../view/VBajaActividad2.php';
 include '../view/VModificarActividad2.php';
 include '../view/VConsultarActividad2.php';
 include '../view/MESSAGE_View.php';
+include "../core/Login.php";
+
+estaRegistrado();
 
     Switch ($_REQUEST['action']){
         case 'alta':
