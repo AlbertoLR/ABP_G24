@@ -16,7 +16,7 @@ class VModificarActividad2{
             <head></head>
             <body>
                 <h2>Seleccione el Actividad a modificar:</h2>
-                <form action="../controler/CActividad2.php" method="post">
+                <form action="../controller/CActividad2.php" method="post">
                     <div>
                         <p>Selecione la ID del Actividad a modificar:</p>
 <?php
@@ -44,7 +44,7 @@ class VModificarActividad2{
             <head></head>
             <body>
                 <h2>Formulario de modificacion del Actividad:</h2>
-                <form action="../controler/CActividad2.php" method="post">
+                <form action="../controller/CActividad2.php" method="post">
 <?php
         echo "<input type='hidden' name='Id_Actividad' value='$Id_Actividad'/>";
 ?>

@@ -16,7 +16,7 @@ class VAltaEjercicio{
             <head></head>
             <body>
                 <h2>Formulario de alta de ejercicio:</h2>
-                <form action="../controler/CEjercicio.php" method="post">
+                <form action="../controller/CEjercicio.php" method="post">
                     <div>
                         <label for="nombreEj">Nombre del ejercicio:</label>
                         <input type="text" name="nombreEj" size="30"/>

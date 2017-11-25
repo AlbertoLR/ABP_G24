@@ -15,7 +15,7 @@ class VBajaUsuario{
             <head></head>
             <body>
                 <h2>Seleccione el Usuario a borrar:</h2>
-                <form action="../controler/CUsuario.php" method="post">
+                <form action="../controller/CUsuario.php" method="post">
                     <div>
                         <p>Selecione la ID del Usuario a borrar:</p>
 <?php
@@ -64,7 +64,7 @@ class VBajaUsuario{
                     </tr>
                 </table>
                 <br><br>
-                <form action="../controler/CUsuario.php" method="POST">
+                <form action="../controller/CUsuario.php" method="POST">
 <?php
         echo "<input type='hidden' name='Id_usuario' value='$UsuarioBorrar[0]'/>";
         echo "<input type='hidden' name='nombreUs' value='$UsuarioBorrar[1]'/>";

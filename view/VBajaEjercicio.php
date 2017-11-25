@@ -16,7 +16,7 @@ class VBajaEjercicio{
             <head></head>
             <body>
                 <h2>Seleccione el ejercicio a borrar:</h2>
-                <form action="../controler/CEjercicio.php" method="post">
+                <form action="../controller/CEjercicio.php" method="post">
                     <div>
                         <p>Selecione la ID del ejercicio a borrar:</p>
 <?php
@@ -65,7 +65,7 @@ class VBajaEjercicio{
                     </tr>
                 </table>
                 <br><br>
-                <form action="../controler/CEjercicio.php" method="POST">
+                <form action="../controller/CEjercicio.php" method="POST">
 <?php
         echo "<input type='hidden' name='idEjercicio' value='$ejercicioBorrar[0]'/>";
         echo "<input type='hidden' name='nombreEj' value='$ejercicioBorrar[1]'/>";

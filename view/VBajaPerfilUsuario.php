@@ -15,7 +15,7 @@ class VBajaPerfilUsuario{
             <head></head>
             <body>
                 <h2>Seleccione el tipo de  Usuario a borrar:</h2>
-                <form action="../controler/CPerfilUsuario.php" method="post">
+                <form action="../controller/CPerfilUsuario.php" method="post">
                     <div>
                         <p>Selecione la ID del Usuario a borrar:</p>
 <?php
@@ -60,7 +60,7 @@ class VBajaPerfilUsuario{
                     
                 </table>
                 <br><br>
-                <form action="../controler/CPerfilUsuario.php" method="POST">
+                <form action="../controller/CPerfilUsuario.php" method="POST">
 <?php
         echo "<input type='hidden' name='Id_PerfilUsuario' value='$UsuarioBorrar[0]'/>";
         echo "<input type='hidden' name='Tipo' value='$UsuarioBorrar[1]'/>";

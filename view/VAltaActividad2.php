@@ -16,7 +16,7 @@ class VAltaActividad2{
             <head></head>
             <body>
                 <h2>Formulario de alta de Actividad:</h2>
-                <form action="../controler/CActividad2.php" method="post">
+                <form action="../controller/CActividad2.php" method="post">
                     <div>
                         <label for="nombreAc">Nombre del Usuario:</label>
                         <input type="text" name="nombreAc" size="30"/>

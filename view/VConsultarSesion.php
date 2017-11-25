@@ -16,7 +16,7 @@ class VConsultarSesion {
             <head></head>
             <body>
                 <h2>Formulario de busqueda:</h2>
-                <form action="../controler/CSesion.php" method="post">
+                <form action="../controller/CSesion.php" method="post">
                     <div>
                         <label for="nombreSesion">Nombre del ejercicio:</label>
                         <input type="text" name="nombreSesion" size="50"/>

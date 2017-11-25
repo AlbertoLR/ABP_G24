@@ -16,7 +16,7 @@ class VBajaAccion{
             <head></head>
             <body>
                 <h2>Seleccione la acción a borrar:</h2>
-                <form action="../controler/CAccion.php" method="post">
+                <form action="../controller/CAccion.php" method="post">
                     <div>
                         <p>Selecione la ID de la acción a borrar:</p>
 <?php
@@ -60,7 +60,7 @@ class VBajaAccion{
 
                 </table>
                 <br><br>
-                <form action="../controler/CAccion.php" method="POST">
+                <form action="../controller/CAccion.php" method="POST">
 <?php
         echo "<input type='hidden' name='idAccion' value='$accionBorrar[0]'/>";
         echo "<input type='hidden' name='nombreAc' value='$accionBorrar[1]'/>";

@@ -16,7 +16,7 @@ class VModificarTabla {
             <head></head>
             <body>
                 <h2>Seleccione la tabla a modificar:</h2>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <div>
                         <p>Selecione la ID de la tabla a modifiacar:</p>
 <?php
@@ -42,7 +42,7 @@ class VModificarTabla {
             <head></head>
             <body>
                 <h2>Formulario de modificacion de tabla:</h2>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
 <?php
         echo "<input type='hidden' name='idTabla' value='$idTabla'/>";
 ?>

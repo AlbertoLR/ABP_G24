@@ -16,7 +16,7 @@ class VConsultarActividad2{
             <head></head>
             <body>
                 <h2>Formulario de busqueda:</h2>
-                <form action="../controler/CActividad2.php" method="post">
+                <form action="../controller/CActividad2.php" method="post">
                     <div>
                         <label for="sala">DNI: </label>
                         <input type="text" name="sala" size="9"/>

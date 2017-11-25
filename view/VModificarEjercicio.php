@@ -16,7 +16,7 @@ class VModificarEjercicio{
             <head></head>
             <body>
                 <h2>Seleccione el ejercicio a modificar:</h2>
-                <form action="../controler/CEjercicio.php" method="post">
+                <form action="../controller/CEjercicio.php" method="post">
                     <div>
                         <p>Selecione la ID del ejercicio a modifiacar:</p>
 <?php
@@ -44,7 +44,7 @@ class VModificarEjercicio{
             <head></head>
             <body>
                 <h2>Formulario de modificacion del ejercicio:</h2>
-                <form action="../controler/CEjercicio.php" method="post">
+                <form action="../controller/CEjercicio.php" method="post">
 <?php
         echo "<input type='hidden' name='idEjercicio' value='$idEjercicio'/>";
 ?>

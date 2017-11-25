@@ -12,7 +12,7 @@ class MLogin {
     function __construct($dni) {
         $this->dni=$dni;
         
-        include_once "../ConexionBD.php";
+        include_once "../core/ConexionBD.php";
         $this->mysqli=conexionBD();
     }
     

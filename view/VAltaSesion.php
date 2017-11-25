@@ -16,7 +16,7 @@ class VAltaSesion {
             <head></head>
             <body>
                 <h2>Formulario de alta de sesion:</h2>
-                <form action="../controler/CSesion.php" method="post">
+                <form action="../controller/CSesion.php" method="post">
                     <div>
                         <label for="nombreSesion">Nombre de la sesion:</label>
                         <input type="text" name="nombreSesion" size="50"/>

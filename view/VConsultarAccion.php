@@ -16,7 +16,7 @@ class VConsultarAccion{
             <head></head>
             <body>
                 <h2>Formulario de busqueda:</h2>
-                <form action="../controler/CAccion.php" method="post">
+                <form action="../controller/CAccion.php" method="post">
                     <div>
                         <label for="nombreAc">Nombre de la acción:</label>
                         <input type="text" name="nombreAc" size="30"/>

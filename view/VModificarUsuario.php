@@ -16,7 +16,7 @@ class VModificarUsuario{
             <head></head>
             <body>
                 <h2>Seleccione el Usuario a modificar:</h2>
-                <form action="../controler/CUsuario.php" method="post">
+                <form action="../controller/CUsuario.php" method="post">
                     <div>
                         <p>Selecione la ID del Usuario a modificar:</p>
 <?php
@@ -44,7 +44,7 @@ class VModificarUsuario{
             <head></head>
             <body>
                 <h2>Formulario de modificacion del Usuario:</h2>
-                <form action="../controler/CUsuario.php" method="post">
+                <form action="../controller/CUsuario.php" method="post">
 <?php
         echo "<input type='hidden' name='Id_usuario' value='$Id_usuario'/>";
 ?>

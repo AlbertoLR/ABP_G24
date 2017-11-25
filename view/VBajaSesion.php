@@ -16,7 +16,7 @@ class VBajaSesion {
             <head></head>
             <body>
                 <h2>Seleccione la sesion a borrar:</h2>
-                <form action="../controler/CSesion.php" method="post">
+                <form action="../controller/CSesion.php" method="post">
                     <div>
                         <p>Selecione la ID de la sesion a borrar:</p>
 <?php
@@ -81,7 +81,7 @@ class VBajaSesion {
                     </tr>
                 </table>
                 <br><br>
-                <form action="../controler/CSesion.php" method="POST">
+                <form action="../controller/CSesion.php" method="POST">
 <?php
         echo "<input type='hidden' name='idSesion' value='$sesionBorrar[0]]'/>";
         echo "<input type='hidden' name='action' value='baja'/>";

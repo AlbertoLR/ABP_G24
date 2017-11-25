@@ -16,7 +16,7 @@ class VBajaTabla {
             <head></head>
             <body>
                 <h2>Seleccione la tabla a borrar:</h2>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <div>
                         <p>Selecione la ID de la tabla a borrar:</p>
 <?php
@@ -63,7 +63,7 @@ class VBajaTabla {
                     </tr>
                 </table>
                 <br><br>
-                <form action="../controler/CTabla.php" method="POST">
+                <form action="../controller/CTabla.php" method="POST">
 <?php
         echo "<input type='hidden' name='idTabla' value='$tablaBorrar[0]'/>";
         echo "<input type='hidden' name='action' value='baja'/>";

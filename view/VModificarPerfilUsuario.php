@@ -16,7 +16,7 @@ class VModificarPerfilUsuario{
             <head></head>
             <body>
                 <h2>Seleccione el tipo de  Usuario a modificar:</h2>
-                <form action="../controler/CPerfilUsuario.php" method="post">
+                <form action="../controller/CPerfilUsuario.php" method="post">
                     <div>
                         <p>Selecione la ID del Usuario a modificar:</p>
 <?php
@@ -44,7 +44,7 @@ class VModificarPerfilUsuario{
             <head></head>
             <body>
                 <h2>Formulario de modificacion del Perfil:</h2>
-                <form action="../controler/CPerfilUsuario.php" method="post">
+                <form action="../controller/CPerfilUsuario.php" method="post">
 <?php
         echo "<input type='hidden' name='Id_PerfilUsuario' value='$Id_PerfilUsuario'/>";
 ?>

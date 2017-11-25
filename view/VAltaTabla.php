@@ -16,7 +16,7 @@ class VAltaTabla {
             <head></head>
             <body>
                 <h2>Formulario de alta de tabla:</h2>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <div>
                         <label for="nombreTabla">Nombre:</label>
                         <input type="text" name="nombreTabla" size="50"/>

@@ -16,7 +16,7 @@ class VConsultarPerfilUsuario{
             <head></head>
             <body>
                 <h2>Formulario de busqueda:</h2>
-                <form action="../controler/CPerfilUsuario.php" method="post">
+                <form action="../controller/CPerfilUsuario.php" method="post">
                     <div>
                         <label for="Tipo">Tipo:  </label>
                         <input type="text" name="Tipo" size="9"/>

@@ -18,7 +18,7 @@ class VLogin {
             </head>
             <body>
                 <h2>Formulario de login:</h2>
-                <form action="../controler/CLogin.php" method="post">
+                <form action="../controller/CLogin.php" method="post">
                     <div>
                         <label for="dni">Usuario:</label>
                         <input type="text" name="dni" size="9"/>

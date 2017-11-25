@@ -17,7 +17,7 @@ class VAsignarUsuario {
             <body>
                 <h2>Asignar usuarios:</h2>
                 <p>Seleccione la tabla a la que asignar o quitar usuarios:</p>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <div>
                         <p>Selecione la ID de la tabla:</p>
 <?php
@@ -46,7 +46,7 @@ class VAsignarUsuario {
 <?php
         echo "<p>Seleccione si desea borrar o añadir usuarios a la tabla $tabla[1]:</p>";
 ?>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
 <?php
         echo "<input type='hidden' name='idTabla' value='$tabla[0]'/>";
         echo "<input type='hidden' name='action' value='asignarUser'/>";

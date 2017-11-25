@@ -15,7 +15,7 @@ class VBajaActividad2{
             <head></head>
             <body>
                 <h2>Seleccione la actividad a borrar:</h2>
-                <form action="../controler/CActividad2.php" method="post">
+                <form action="../controller/CActividad2.php" method="post">
                     <div>
                         <p>Selecione la ID del Actividad a borrar:</p>
 <?php
@@ -63,7 +63,7 @@ class VBajaActividad2{
                     </tr>
                 </table>
                 <br><br>
-                <form action="../controler/CActividad2.php" method="POST">
+                <form action="../controller/CActividad2.php" method="POST">
 <?php
         echo "<input type='hidden' name='Id_Actividad' value='$ActividadBorrar[0]'/>";
         echo "<input type='hidden' name='nombreAc' value='$ActividadBorrar[1]'/>";

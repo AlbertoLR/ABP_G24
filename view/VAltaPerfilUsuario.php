@@ -16,7 +16,7 @@ class VAltaPerfilUsuario{
             <head></head>
             <body>
                 <h2>Formulario de alta de Usuario:</h2>
-                <form action="../controler/CPerfilUsuario.php" method="post">
+                <form action="../controller/CPerfilUsuario.php" method="post">
                     <div>
                         <label for="Tipo">Tipo de usuario:</label>
                         <input type="text" name="Tipo" size="30"/>

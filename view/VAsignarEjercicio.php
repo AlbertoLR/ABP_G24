@@ -17,7 +17,7 @@ class VAsignarEjercicio {
             <body>
                 <h2>Asignar ejercicios:</h2>
                 <p>Seleccione la tabla a la que asignar los ejercicios:</p>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <div>
                         <p>Selecione la ID de la tabla:</p>
 <?php
@@ -46,7 +46,7 @@ class VAsignarEjercicio {
 <?php
         echo "<p>Selecione los ejercicios a hacer en la tabla $tupla[1]</p>";
 ?>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <div>
                         <p>Marque los ejercicios:</p>
                     
@@ -75,7 +75,7 @@ class VAsignarEjercicio {
             <body>
                 <h2>Asignar ejercicios</h2>
                 <p>Selecione el numero de repeticiones de cada ejercicio</p>
-                <form action="../controler/CTabla.php" method="post">
+                <form action="../controller/CTabla.php" method="post">
                     <p>Escribir el numero de repeticiones:</p>
 <?php
         echo "<input type='hidden' name='idTabla' value='$idTabla'/>";

@@ -16,7 +16,7 @@ class VModificarAccion{
             <head></head>
             <body>
                 <h2>Seleccione la acción a modificar:</h2>
-                <form action="../controler/CAccion.php" method="post">
+                <form action="../controller/CAccion.php" method="post">
                     <div>
                         <p>Seleccione la ID de la acción a modificar:</p>
 <?php

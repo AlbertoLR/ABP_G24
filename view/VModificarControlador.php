@@ -16,7 +16,7 @@ class VModificarControlador{
             <head></head>
             <body>
                 <h2>Seleccione el controlador a modificar:</h2>
-                <form action="../controler/CControlador.php" method="post">
+                <form action="../controller/CControlador.php" method="post">
                     <div>
                         <p>Seleccione la ID del controlador a modificar:</p>
 <?php
@@ -44,7 +44,7 @@ class VModificarControlador{
             <head></head>
             <body>
                 <h2>Formulario de modificacion del controlador:</h2>
-                <form action="../controler/CControlador.php" method="post">
+                <form action="../controller/CControlador.php" method="post">
 <?php
         echo "<input type='hidden' name='idControlador' value='$idControlador'/>";
 ?>

@@ -16,7 +16,7 @@ class VModificarSesion {
             <head></head>
             <body>
                 <h2>Seleccione la sesion a modificar:</h2>
-                <form action="../controler/CSesion.php" method="post">
+                <form action="../controller/CSesion.php" method="post">
                     <div>
                         <p>Selecione la ID de la sesion a modificar:</p>
 <?php
@@ -42,7 +42,7 @@ class VModificarSesion {
             <head></head>
             <body>
                 <h2>Formulario de modificar sesion:</h2>
-                <form action="../controler/CSesion.php" method="post">
+                <form action="../controller/CSesion.php" method="post">
                     <div>
                         <label for="nombreSesion">Nombre de la sesion:</label>
                         <input type="text" name="nombreSesion" size="50"/>

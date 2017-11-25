@@ -16,7 +16,7 @@ class VAltaUsuario{
             <head></head>
             <body>
                 <h2>Formulario de alta de Usuario:</h2>
-                <form action="../controler/CUsuario.php" method="post">
+                <form action="../controller/CUsuario.php" method="post">
                     <div>
                         <label for="nombreUs">Nombre del Usuario:</label>
                         <input type="text" name="nombreUs" size="30"/>

@@ -16,7 +16,7 @@ class VConsultarUsuario{
             <head></head>
             <body>
                 <h2>Formulario de busqueda:</h2>
-                <form action="../controler/CUsuario.php" method="post">
+                <form action="../controller/CUsuario.php" method="post">
                     <div>
                         <label for="DNIUs">DNI: </label>
                         <input type="text" name="DNIUs" size="9"/>

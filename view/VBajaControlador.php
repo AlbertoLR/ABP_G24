@@ -16,7 +16,7 @@ class VBajaControlador{
             <head></head>
             <body>
                 <h2>Seleccione el controlador a borrar:</h2>
-                <form action="../controler/CControlador.php" method="post">
+                <form action="../controller/CControlador.php" method="post">
                     <div>
                         <p>Selecione la ID del controlador a borrar:</p>
 <?php
@@ -60,7 +60,7 @@ class VBajaControlador{
 
                 </table>
                 <br><br>
-                <form action="../controler/CControlador.php" method="POST">
+                <form action="../controller/CControlador.php" method="POST">
 <?php
         echo "<input type='hidden' name='idControlador' value='$controladorBorrar[0]'/>";
         echo "<input type='hidden' name='nombreCt' value='$controladorBorrar[1]'/>";

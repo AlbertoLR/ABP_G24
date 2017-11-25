@@ -16,7 +16,7 @@ class VAltaControlador{
             <head></head>
             <body>
                 <h2>Formulario de alta de controlador:</h2>
-                <form action="../controler/CControlador.php" method="post">
+                <form action="../controller/CControlador.php" method="post">
                     <div>
                         <label for="nombreCt">Nombre del controlador:</label>
                         <input type="text" name="nombreCt" size="30"/>
