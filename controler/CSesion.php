@@ -15,6 +15,9 @@ include '../view/VBajaSesion.php';
 include '../view/VModificarSesion.php';
 include '../view/VConsultarSesion.php';
 include '../view/MESSAGE_View.php';
+include "../core/Login.php";
+
+estaRegistrado();
 
 switch ($_REQUEST['action']){
     case 'alta':

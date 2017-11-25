@@ -4,6 +4,11 @@
  
   @author iago
 -->
+<?php
+include "core/Login.php";
+estaRegistrado();
+?>
+
 <html>
     <head></head>
     <body>

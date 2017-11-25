@@ -6,7 +6,7 @@
  */
 
 function estaRegistrado(){
-    if (isset($_SESSION['loginUser'])){
+    if (isset($_SESSION['Id_usuario'])){
         return TRUE;
     }
     else {

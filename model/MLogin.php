@@ -6,19 +6,18 @@
  */
 
 class MLogin {
-    var $login;
-    var $password;
+    var $dni;
     var $mysqli;
     
-    function __construct($login) {
-        $this->login=$login;
+    function __construct($dni) {
+        $this->dni=$dni;
         
         include_once "../ConexionBD.php";
         $this->mysqli=conexionBD();
     }
     
-    function selectLogin($login){
-        $sql="SELECT * FROM USUARIOS WHERE login='$this->login'";
+    function selectDNI(){
+        $sql="SELECT * FROM Usuario WHERE DNI='$this->dni'";
         if(($resultado=$this->mysqli->query($sql))){
             $tupla=$resultado->fetch_row();
             return $tupla;

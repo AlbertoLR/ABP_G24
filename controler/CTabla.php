@@ -16,6 +16,9 @@ include '../view/VVerDetalleTabla.php';
 include '../view/VAsignarEjercicio.php';
 include '../view/VAsignarUsuario.php';
 include '../view/MESSAGE_View.php';
+include "../core/Login.php";
+
+estaRegistrado();
 
 switch ($_REQUEST['action']){
     case 'alta':

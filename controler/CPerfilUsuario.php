@@ -12,6 +12,9 @@ include '../view/VBajaPerfilUsuario.php';
 include '../view/VModificarPerfilUsuario.php';
 include '../view/VConsultarPerfilUsuario.php';
 include '../view/MESSAGE_View.php';
+include "../core/Login.php";
+
+estaRegistrado();
 
     Switch ($_REQUEST['action']){
         case 'alta':

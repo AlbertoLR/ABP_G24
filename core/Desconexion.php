@@ -7,7 +7,7 @@
 
 session_start();
 include '../view/MESSAGE_View.php';
-$login=$_SESSION['loginUser'];
+$nombre=$_SESSION['Nombre'];
 session_destroy();
-new MESSAGE_View("Desconexion del usuario $login realizada con exito", "index.php");
+new MESSAGE_View("Desconexion del usuario $nombre realizada con exito", "index.php");
 ?>
