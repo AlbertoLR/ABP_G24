@@ -13,40 +13,32 @@ class VConsultarEjercicio{
     function render(){
 ?>
         <html>
-            <head></head>
+            <head>
+                <title>Ver ejercicios</title>
+            </head>
             <body>
-                <h2>Formulario de busqueda:</h2>
-                <form action="../controller/CEjercicio.php" method="post">
-                    <div>
-                        <label for="nombreEj">Nombre del ejercicio:</label>
-                        <input type="text" name="nombreEj" size="30"/>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="consulta">Enviar</button>
-                        <button type="reset" name="reset" value="Borrar">Borrar</button>
-                    </div>
-                </form>
+                <h2>Tipos de Ejercicios:</h2>
+                <p><a href="../controller/CEjercicio.php?action=consulta&tipoEj=aerobico">Ejercicios Aerobicos</a></p>
+                <p><a href="../controller/CEjercicio.php?action=consulta&tipoEj=anaerobico">Ejercicios Anaerobicos</a></p>
+                <p><a href="../controller/CEjercicio.php?action=consulta&tipoEj=mixto">Ejercicios Mixtos</a></p>
             </body>
 	</html>
 <?php
     }
     
     static function mostrar($resultado){
+        $tupla=$resultado->fetch_row();
 ?>
         <html>
-            <head></head>
+            <head>
+                <title>Ver ejercicios</title>
+            </head>
             <body>
-                <h2>Formulario de busqueda:</h2>
-                <table>
-                    <tr>
-                        <td>Nombre ejercicio</td>
-                        <td>Descripcion ejercicio</td>
-                    </tr>
 <?php
-        $tupla=$resultado->fetch_row();
+        echo "<h2>Ejercicios $tupla[3]:</h2>";
+
         do{
-            echo "<tr><td>$tupla[1]</td>";
-            echo "<td>$tupla[2]</td></tr>";
+            echo "<p><a href='../controller/CEjercicio.php?action=verDetalle&idEjercicio=$tupla[0]'>$tupla[1]</a></p>";
             $tupla=$resultado->fetch_row();
         }while(!is_null($tupla));
 ?>

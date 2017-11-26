@@ -26,6 +26,14 @@ class VAltaEjercicio{
                         <textarea name="descripcionEj">Escribir descripcion aqui</textarea>
                     </div>
                     <div>
+                        <label for="tipoEj">Tipo de ejercicio:</label><br>
+                        <select name="tipoEj">
+                            <option value="aerobico">Aerobico</option>
+                            <option value="anaerobico">Anaerobico</option>
+                            <option value="mixto">Ej. mixto</option>
+                        </select>
+                    </div>
+                    <div>
                         <button type="submit" name="action" value="alta">Enviar</button>
                         <button type="reset" name="reset" value="Borrar">Borrar</button>
                     </div>

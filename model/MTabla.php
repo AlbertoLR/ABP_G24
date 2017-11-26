@@ -194,7 +194,7 @@ class MTabla {
 
     //devuelve los usuarios q tienen asignados la tabla
     function usersTabla(){
-        $sql="SELECT AsignacionTabla.idUsuario,Usuario.Nombre FROM AsignacionTabla,Usuario WHERE AsignacionTabla.idUsuario=Usuario.idUsuario AND AsignacionTabla.idTabla='$this->idTabla'";
+        $sql="SELECT AsignacionTabla.idUsuario,Usuario.Nombre FROM AsignacionTabla,Usuario WHERE AsignacionTabla.idUsuario=Usuario.Id_usuario AND AsignacionTabla.idTabla='$this->idTabla'";
         if($resultado= $this->mysqli->query($sql)){
             return $resultado;
         }

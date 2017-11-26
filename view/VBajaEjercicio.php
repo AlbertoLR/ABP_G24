@@ -22,7 +22,7 @@ class VBajaEjercicio{
 <?php
         $tupla=$listaEjercicios->fetch_row();
         do{
-            echo "<input type='radio' name='idEjercicio' value='$tupla[0]'>$tupla[0] -> $tupla[1]<br>";
+            echo "<input type='radio' name='idEjercicio' value='$tupla[0]'> $tupla[1]<br>";
             $tupla=$listaEjercicios->fetch_row();
         }while(!is_null($tupla));
 ?>
@@ -63,13 +63,17 @@ class VBajaEjercicio{
         echo "<td>$ejercicioBorrar[2]</td>";
 ?>
                     </tr>
+                    <tr>
+                        <td>Tipo de ejercicio:</td>
+<?php
+        echo "<td>$ejercicioBorrar[3]</td>";
+?>
+                    </tr>
                 </table>
                 <br><br>
                 <form action="../controller/CEjercicio.php" method="POST">
 <?php
         echo "<input type='hidden' name='idEjercicio' value='$ejercicioBorrar[0]'/>";
-        echo "<input type='hidden' name='nombreEj' value='$ejercicioBorrar[1]'/>";
-        echo "<input type='hidden' name='descripcionEj' value='$ejercicioBorrar[2]'/>";
         echo "<input type='hidden' name='action' value='baja'/>";
 ?>
                     <div>

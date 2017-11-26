@@ -5,40 +5,17 @@
  * @author iago
  */
 class VVerDetalleTabla {
-    function __construct() {
-        $this->render();
+    function __construct($tabla,$ejercicios,$usuarios) {
+        $this->render($tabla,$ejercicios,$usuarios);
     }
     
-    function render(){
-?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de busqueda de tabla:</h2>
-                <form action="../controller/CTabla.php" method="post">
-                    <div>
-                        <label for="nombreTabla">Nombre:</label>
-                        <input type="text" name="nombreTabla" size="50"/>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="verDetalle">Enviar</button>
-                        <button type="reset" name="reset" value="Borrar">Borrar</button>
-                    </div>
-                </form>
-            </body>
-	</html>
-<?php
-    }
-    
-    static function mostrar($tabla,$ejercicios,$usuarios){
+    function render($tabla,$ejercicios,$usuarios){
 ?>
         <html>
             <head></head>
             <body>
 <?php
-        echo "<h2>Ver en detalle tabla $tabla[1]</h2>";
-        echo "<p>Id de la tabla: $tabla[0]</p>";
-        echo "<p>Nombre de la tabla: $tabla[1]</p>";
+        echo "<h2>Tabla $tabla[1]:</h2>";
         echo "<p>Tipo de tabla: $tabla[2]</p>";
 ?>
                 <p>Ejercicios de la tabla:</p>

@@ -10,12 +10,14 @@ class MEjercicio {
     var $idEjercicio;
     var $nombreEj;
     var $descripcionEj;
+    var $tipoEj;
     var $mysqli; //atributo manejador de la BD
     
-    function __construct($idEjercicio,$nombreEj,$descripcionEj){
+    function __construct($idEjercicio,$nombreEj,$descripcionEj,$tipoEj){
         $this->idEjercicio=$idEjercicio;
         $this->nombreEj=$nombreEj;
         $this->descripcionEj=$descripcionEj;
+        $this->tipoEj=$tipoEj;
         
         //incluimos de manera unitaria la funcion de conexion a la BD
         include_once "../core/ConexionBD.php";
@@ -28,7 +30,7 @@ class MEjercicio {
             $sql="SELECT * FROM Ejercicio WHERE nombreEj='$this->nombreEj'";
             $resultado= $this->mysqli->query($sql);
             if ($resultado->num_rows==0) { //comprobamos q no exita ya un ej con ese nombre
-                $sql = "INSERT INTO Ejercicio (nombreEj,descripcionEj) VALUES ('$this->nombreEj','$this->descripcionEj')";
+                $sql = "INSERT INTO Ejercicio (nombreEj,descripcionEj,tipoEj) VALUES ('$this->nombreEj','$this->descripcionEj','$this->tipoEj')";
                 $this->mysqli->query($sql);
                 return "Inserción realizada con éxito";
             }
@@ -66,13 +68,26 @@ class MEjercicio {
             }
             else{
                 $nombreEj= $this->nombreEj;
-            }if($this->descripcionEj==""){ //si descripcion esta vacia se le añade el q ya tiene
+                $sql="SELECT * FROM Ejercicio WHERE nombreEj='$nombreEj'";
+                $resultado= $this->mysqli->query($sql);
+                    if ($resultado->num_rows==1) {
+                        return "Ya existe un ejercicio con ese nombre";
+                    }
+            }
+            if($this->descripcionEj==""){ //si descripcion esta vacia se le añade el q ya tiene
                 $descripcionEj=$tupla[2];
             }
             else{
                 $descripcionEj= $this->descripcionEj;
             }
-            $sql = "UPDATE Ejercicio SET nombreEj='$nombreEj',descripcionEj='$descripcionEj' WHERE idEjercicio=$this->idEjercicio";
+            if($this->tipoEj==""){ //si descripcion esta vacia se le añade el q ya tiene
+                $tipoEj=$tupla[3];
+            }
+            else{
+                $tipoEj= $this->tipoEj;
+            }
+            
+            $sql = "UPDATE Ejercicio SET nombreEj='$nombreEj',descripcionEj='$descripcionEj',tipoEj='$tipoEj' WHERE idEjercicio=$this->idEjercicio";
             $this->mysqli->query($sql);
             return "Modificado correctamente";
         }
@@ -98,6 +113,16 @@ class MEjercicio {
         }
     }
     
+    function selectTipo(){
+        $sql="SELECT * FROM Ejercicio WHERE tipoEj='$this->tipoEj'";
+        if(($resultado=$this->mysqli->query($sql))){
+            return $resultado;
+        }
+        else{
+            return "La busqueda no ha devuelto resultado";
+        }
+    }
+            
     function selectID(){
         $sql="SELECT * FROM Ejercicio WHERE idEjercicio='$this->idEjercicio'";
         if(($resultado=$this->mysqli->query($sql))){

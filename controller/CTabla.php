@@ -119,33 +119,20 @@ switch ($_REQUEST['action']){
         break;
         
     case 'consulta':
-        if(!isset($_REQUEST['nombreTabla']) && !isset($_REQUEST['tipoTabla'])){
-            new VConsultarTabla();
-        }
-        else{
-            $nombreTabla=$_REQUEST['nombreTabla'];
-            $tipoTabla=$_REQUEST['tipoTabla'];
-            
-            $tabla=new MTabla("",$nombreTabla,$tipoTabla);
-            $resultado=$tabla->select();
-            VConsultarTabla::mostrar($resultado);
-        }
+        //hecho para usuario generico FALTA SESSION
+        $modelo=new MTabla("","","");
+        $tablas=$modelo->selectAll();
+        new VConsultarTabla($tablas);
         break;
         
     case 'verDetalle':
-        if(!isset($_REQUEST['nombreTabla'])){
-            new VVerDetalleTabla();
-        }
-        else{
-            $nombreTabla=$_REQUEST['nombreTabla'];
-            $modelo=new MTabla("",$nombreTabla,"");
-            $tabla=$modelo->selectNombre();
-            $modelo=new MTabla($tabla[0],"","");
-            $ejercicios=$modelo->ejsTabla();
-            $usuarios=$modelo->usersTabla();
+        $idTabla=$_REQUEST['idTabla'];
+        $modelo=new MTabla($idTabla,"","");
+        $tabla=$modelo->selectID();
+        $ejercicios=$modelo->ejsTabla();
+        $usuarios=$modelo->usersTabla();
             
-            VVerDetalleTabla::mostrar($tabla,$ejercicios,$usuarios);
-        }
+        new VVerDetalleTabla($tabla,$ejercicios,$usuarios);
         break;
         
     case 'asignarUser':

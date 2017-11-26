@@ -22,7 +22,7 @@ class VModificarEjercicio{
 <?php
         $tupla=$listaEjercicios->fetch_row();
         do{
-            echo "<input type='radio' name='idEjercicio' value='$tupla[0]'>$tupla[0] -> $tupla[1]<br>";
+            echo "<input type='radio' name='idEjercicio' value='$tupla[0]'> $tupla[1]<br>";
             $tupla=$listaEjercicios->fetch_row();
         }while(!is_null($tupla));
 ?>
@@ -55,6 +55,14 @@ class VModificarEjercicio{
                     <div>
                         <label for="descripcionEj">Descripcion del ejercicio:</label><br>
                         <textarea name="descripcionEj">Escribir descripcion aqui</textarea>
+                    </div>
+                    <div>
+                        <label for="tipoEj">Tipo de ejercicio:</label><br>
+                        <select name="tipoEj">
+                            <option value="aerobico">Aerobico</option>
+                            <option value="anaerobico">Anaerobico</option>
+                            <option value="mixto">Ej. mixto</option>
+                        </select>
                     </div>
                     <div>
                         <button type="submit" name="action" value="modificacion">Enviar</button>
