@@ -46,7 +46,7 @@ switch ($_REQUEST['action']){
             $idTabla=$_REQUEST['idTabla'];
             $tabla=new MTabla($idTabla,"","");
             $tupla=$tabla->selectID();
-            $modeloEj=new MEjercicio("","","");
+            $modeloEj=new MEjercicio("","","","");
             $ejercicios=$modeloEj->select();
         
             VAsignarEjercicio::mostrarEjercicios($tupla,$ejercicios);
@@ -55,7 +55,7 @@ switch ($_REQUEST['action']){
             $idTabla=$_REQUEST['idTabla'];
             $ejercicios=$_REQUEST['ejercicios'];
             for($i=0;$i<count($ejercicios);$i++){
-                $modeloEj=new MEjercicio($ejercicios[$i],"","");
+                $modeloEj=new MEjercicio($ejercicios[$i],"","","");
                 $tupla=$modeloEj->selectID();
                 $nombreEj[$i]=$tupla[1];
             }

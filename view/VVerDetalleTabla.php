@@ -21,15 +21,13 @@ class VVerDetalleTabla {
                 <p>Ejercicios de la tabla:</p>
                 <table>
                     <tr>
-                        <td>Id ejercicio</td>
                         <td>Nombre ejercicio</td>
                         <td>Num repeticiones</td>
                     </tr>
 <?php
         $tupla=$ejercicios->fetch_row();
         do{
-            echo "<tr><td>$tupla[0]</td>";
-            echo "<td>$tupla[1]</td>";
+            echo "<tr><td><a href='../controller/CEjercicio.php?idEjercicio=$tupla[0]&action=verDetalle'>$tupla[1]</a></td>";
             echo "<td>$tupla[2]</td></tr>";
             $tupla=$ejercicios->fetch_row();
         }while(!is_null($tupla));
