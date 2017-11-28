@@ -33,7 +33,14 @@ switch ($_REQUEST['action']){
 
             $tabla=new MTabla("",$nombreTabla,$tipoTabla);
             $respuesta=$tabla->insert();
-            new MESSAGE_View($respuesta, "../index.php");
+            
+            $volver="../index.php";
+            if($respuesta=="Inserción realizada con éxito"){
+                $tupla=$tabla->selectNombre();
+                $idTabla=$tupla[0];
+                $volver="../controller/CTabla.php?action=asignarEj&idTabla=$idTabla";
+            }
+            new MESSAGE_View($respuesta,$volver);
         }
         break;
     case 'asignarEj':
@@ -71,7 +78,16 @@ switch ($_REQUEST['action']){
             for($i=0;$i<count($ejercicios);$i++){
                 $tabla->asignarEjercicio($ejercicios[$i],$cantidades[$i]);
             }
-            new MESSAGE_View("Ejercicios asignados", "../index.php");
+            
+            $modelo=new MTabla($idTabla,"","");
+            $tabla=$modelo->selectID();
+            $tipoTabla=$tabla[2];
+            $volver="../index.php";
+            if($tipoTabla=="Personalizada"){
+                $volver="../controller/CTabla.php?action=asignarUser&idTabla=$idTabla";
+            }
+            
+            new MESSAGE_View("Ejercicios asignados",$volver);
         }
         break;
     case 'baja':
@@ -136,28 +152,19 @@ switch ($_REQUEST['action']){
         break;
         
     case 'asignarUser':
-        if(!isset($_REQUEST['idTabla'])){
-            $modelo=new MTabla("","","");
-            $tablas=$modelo->selectAll();
-            new VAsignarUsuario($tablas);
-        }
-        elseif(!isset($_REQUEST['opcion'])){
+        if(!isset($_REQUEST['opcion'])){
             $idTabla=$_REQUEST['idTabla'];
             $modelo=new MTabla($idTabla,"","");
             $tabla=$modelo->selectID();
-            VAsignarUsuario::elegirOpcion($tabla);
+            new VAsignarUsuario($tabla);
         }
         elseif(!isset($_REQUEST['usuarios'])){
-            $idTabla=$_REQUEST['idTabla'];
-            $modelo=new MTabla($idTabla,"","");
+            if($_REQUEST['opcion']=="si"){
+                $idTabla=$_REQUEST['idTabla'];
+                $modelo=new MTabla($idTabla,"","");
             
-            if($_REQUEST['opcion']=='asignar'){
                 $usuarios=$modelo->usuarios();
-                VAsignarUsuario::asignarUsuario($usuarios,$idTabla,"asignar");
-            }
-            if($_REQUEST['opcion']=='borrar'){
-                $usuarios=$modelo->usersTabla();
-                VAsignarUsuario::asignarUsuario($usuarios,$idTabla,"borrar");
+                VAsignarUsuario::asignarUsuario($usuarios,$idTabla,"si");
             }
         }
         else{
@@ -165,16 +172,11 @@ switch ($_REQUEST['action']){
             $usuarios=$_REQUEST['usuarios'];
             $modelo=new MTabla($idTabla,"","");
             
-            if($_REQUEST['opcion']=='asignar'){
-                for($i=0;$i<count($usuarios);$i++){
-                    $modelo->asignarTabla($usuarios[$i]);
-                }
+            for($i=0;$i<count($usuarios);$i++){
+                $modelo->asignarTabla($usuarios[$i]);
             }
-            if($_REQUEST['opcion']=='borrar'){
-                for($i=0;$i<count($usuarios);$i++){
-                    $modelo->quitarTabla($usuarios[$i]);
-                }
-            }
+            
+            new MESSAGE_View("Usuarios añadidos", "../index.php");
         }
         break;
 }

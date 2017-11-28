@@ -98,7 +98,7 @@ class MSesion {
     
     function select(){
         $soloEste=TRUE;
-        $sql="SELECT Tabla.nombre,Sesion.nombreSesion,Sesion.horaInicio,Sesion.horaFin,Sesion.comentario FROM Sesion,Tabla WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario='$this->idUser' AND ";
+        $sql="SELECT Sesion.idSesion,Tabla.nombre,Sesion.nombreSesion,Sesion.horaInicio,Sesion.horaFin,Sesion.comentario FROM Sesion,Tabla WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario='$this->idUser' AND ";
         if($this->idTabla<>""){
             $sql.="Sesion.idTabla='$this->idTabla'";
             $soloEste=FALSE;

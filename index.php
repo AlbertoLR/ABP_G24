@@ -121,9 +121,7 @@ estaRegistrado();
                     <option>baja</option>
                     <option>modificacion</option>
                     <option>consulta</option>
-					<option>asignarEj</option>
-					<option>asignarUser</option>
-					<option>verDetalle</option>
+                    <option>asignarEj</option>
                 </select>
             </div>
             <button type="submit" name="submit" value="Enviar">Enviar</button>

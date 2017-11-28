@@ -1,25 +1,24 @@
 <?php
 session_start();
-$_SESSION['idUser']=0; //linea de prueba BORRAR
-$idUser=$_SESSION['idUser'];
 /**
  * En este archivo se detallara el controlador de sesion
  *
  * @author iago
  */
 
-session_start();
-
 //incluidos todas las vistas y el modelo de sesion
 include '../model/MSesion.php';
+include '../model/MTabla.php';
 include '../view/VAltaSesion.php';
 include '../view/VBajaSesion.php';
 include '../view/VModificarSesion.php';
 include '../view/VConsultarSesion.php';
+include '../view/VVerDetalleSesion.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
 estaRegistrado();
+$idUser=$_SESSION['Id_usuario'];
 
 switch ($_REQUEST['action']){
     case 'alta':
@@ -103,18 +102,26 @@ switch ($_REQUEST['action']){
         break;
     
     case 'consulta':
-        if(!isset($_REQUEST['nombreSesion']) && !isset($_REQUEST['idTabla'])){
+        if(!isset($_REQUEST['idTabla'])){
             $user=new MSesion("",$idUser,"","","","","");
             $tablasUser=$user->tablasUser();
             new VConsultarSesion($tablasUser);
         }
         else{
             $idTabla=$_REQUEST['idTabla'];
-            $nombreSesion=$_REQUEST['nombreSesion'];
-            
-            $sesion=new MSesion("",$idUser,$idTabla,$nombreSesion,"","","");
-            $resultado=$sesion->select();
-            VConsultarSesion::mostrar($resultado);
+            $modelo=new MSesion("",$idUser,$idTabla,"","","","");
+            $sesiones=$modelo->select();
+            VConsultarSesion::mostrar($sesiones);
         }
         break;
+        
+    case "verDetalle":
+        $idSesion=$_REQUEST['idSesion'];
+        $modelo=new MSesion($idSesion,"","","","","","");
+        $sesion=$modelo->selectID();
+        $idTabla=$sesion[2];
+        $modeloTabla=new MTabla($idTabla,"","");
+        $tabla=$modeloTabla->selectID();
+        $nombreTabla=$tabla[1];
+        new VVerDetalleSesion($sesion,$nombreTabla);
 }

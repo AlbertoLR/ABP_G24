@@ -43,7 +43,7 @@ class MTabla {
         $sql="SELECT * FROM Tabla WHERE idTabla='$this->idTabla'";
         $resultado= $this->mysqli->query($sql);
         if ($resultado->num_rows==1) { //si encuentra la tupla a borrar
-            $sql = "DELETE FROM Tabla WHERE (idTabla='$this->idTabla')";
+            $sql = "DELETE FROM Tabla WHERE idTabla='$this->idTabla'";
             $this->mysqli->query($sql);
             return "Borrado correctamente";
         }

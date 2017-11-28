@@ -6,45 +6,18 @@
  */
 
 class VAsignarUsuario {
-    function __construct($tablas) {
-        $this->render($tablas);
+    function __construct($tabla) {
+        $this->render($tabla);
     }
     
-    function render($tablas){
-?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Asignar usuarios:</h2>
-                <p>Seleccione la tabla a la que asignar o quitar usuarios:</p>
-                <form action="../controller/CTabla.php" method="post">
-                    <div>
-                        <p>Selecione la ID de la tabla:</p>
-<?php
-        $tupla=$tablas->fetch_row();
-        do{
-            echo "<input type='radio' name='idTabla' value='$tupla[0]'>$tupla[0] -> $tupla[1]<br>";
-            $tupla=$tablas->fetch_row();
-        }while(!is_null($tupla));
-?>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="asignarUser">Enviar</button>
-                    </div>
-                </form>
-            </body>
-        </html>
-<?php
-    }
-    
-    static function elegirOpcion($tabla){
+    function render($tabla){
 ?>
         <html>
             <head></head>
             <body>
                 <h2>Asignar usuarios:</h2>
 <?php
-        echo "<p>Seleccione si desea borrar o añadir usuarios a la tabla $tabla[1]:</p>";
+        echo "<p>Seleccione si desea añadir ya usuarios a la tabla $tabla[1]:</p>";
 ?>
                 <form action="../controller/CTabla.php" method="post">
 <?php
@@ -52,8 +25,8 @@ class VAsignarUsuario {
         echo "<input type='hidden' name='action' value='asignarUser'/>";
 ?>
                     <div>
-                        <button type="submit" name="opcion" value="asignar">Añadir</button>
-                        <button type="submit" name="opcion" value="borrar">Borrar</button>
+                        <button type="submit" name="opcion" value="si">Si</button>
+                        <button type="submit" name="opcion" value="no">No</button>
                     </div>
                 </form>
             </body>
@@ -67,7 +40,7 @@ class VAsignarUsuario {
             <head></head>
             <body>
                 <h2>Asignar usuarios</h2>
-                <p>Selecione los usuarios sobre los que realizar la accion:</p>";
+                <p>Selecione los usuarios sobre los que realizar la accion:</p>
                 <form action="./CTabla.php" method="post">
                     <div>
                         <p>Marque los usuarios:</p>

@@ -35,75 +35,69 @@ switch ($_REQUEST['action']){
         }
         break;
     
-        case 'baja':
-            if(!isset($_REQUEST['idEjercicio'])){
-                $selectAll=new MEjercicio("","","","");
-                $listaEjercicios=$selectAll->select();
-                new VBajaEjercicio($listaEjercicios);
-            }
-            elseif(!isset($_REQUEST['confirmar'])) {
-                $idEjercicio=$_REQUEST['idEjercicio'];
-                $modelo=new MEjercicio($idEjercicio,"","","");
-                $ejercicioBorrar=$modelo->selectID();
-                VBajaEjercicio::solicitarConfirmacion($ejercicioBorrar);
-            }
-            else{
-                if($_REQUEST['confirmar']=="si"){ //si el usuario confirma q quiere borrar el ej
-                    $idEjercicio=$_REQUEST['idEjercicio'];
-
-                    $ejercicio=new MEjercicio($idEjercicio,"","","");
-                    $respuesta=$ejercicio->delete();
-                    new MESSAGE_View($respuesta, "../index.php");
-                }
-            }
-            break;
-    
-        case 'consulta':
-            if(!isset($_REQUEST['tipoEj'])){
-                new VConsultarEjercicio();
-            }
-            else{
-                $tipoEj=$_REQUEST['tipoEj'];
-
-                $ejercicio=new MEjercicio("","","",$tipoEj);
-                $resultado=$ejercicio->selectTipo();
-                VConsultarEjercicio::mostrar($resultado);
-            }
-            break;
-            
-        case 'verDetalle':
+    case 'baja':
+        if(!isset($_REQUEST['idEjercicio'])){
+            $selectAll=new MEjercicio("","","","");
+            $listaEjercicios=$selectAll->select();
+            new VBajaEjercicio($listaEjercicios);
+        }
+        elseif(!isset($_REQUEST['confirmar'])) {
             $idEjercicio=$_REQUEST['idEjercicio'];
             $modelo=new MEjercicio($idEjercicio,"","","");
-            $ejercicio=$modelo->selectID();
-            new VVerDetalleEjercicio($ejercicio);
-            break;
-    
-        case 'modificacion':
-            if(!isset($_REQUEST['idEjercicio'])){
-                $selectAll=new MEjercicio("","","","");
-                $listaEjercicios=$selectAll->select();
-                new VModificarEjercicio($listaEjercicios); //asi conseguimos la id del ejercicio a modificar 
-            }
-            elseif (!isset($_REQUEST['nombreEj']) && !isset($_REQUEST['descripcionEj']) && !isset($_REQUEST['tipoEj'])) {
+            $ejercicioBorrar=$modelo->selectID();
+            VBajaEjercicio::solicitarConfirmacion($ejercicioBorrar);
+        }
+        else{
+            if($_REQUEST['confirmar']=="si"){ //si el usuario confirma q quiere borrar el ej
                 $idEjercicio=$_REQUEST['idEjercicio'];
-                VModificarEjercicio::mostrarFormulario($idEjercicio); //luego se envia a un formulario para editar
-            }
-            else{
-                $idEjercicio=$_REQUEST['idEjercicio'];
-                $nombreEj=$_REQUEST['nombreEj'];
-                $descripcionEj=$_REQUEST['descripcionEj'];
-                $tipoEj=$_REQUEST['tipoEj'];
 
-                $ejercicio=new MEjercicio($idEjercicio,$nombreEj,$descripcionEj,$tipoEj);
-                $respuesta=$ejercicio->update();
-                new MESSAGE_View($respuesta,"../index.php");
+                $ejercicio=new MEjercicio($idEjercicio,"","","");
+                $respuesta=$ejercicio->delete();
+                new MESSAGE_View($respuesta, "../index.php");
             }
+        }
             break;
-    }
     
-//    private function showAllEjercicio(){
-//        $ejercicio=new MEjercicio("","","");
-//        return $ejercicio->select();
-//    }
-//}
+    case 'consulta':
+        if(!isset($_REQUEST['tipoEj'])){
+            new VConsultarEjercicio();
+        }
+        else{
+            $tipoEj=$_REQUEST['tipoEj'];
+
+            $ejercicio=new MEjercicio("","","",$tipoEj);
+            $resultado=$ejercicio->selectTipo();
+            VConsultarEjercicio::mostrar($resultado);
+        }
+        break;
+            
+    case 'verDetalle':
+        $idEjercicio=$_REQUEST['idEjercicio'];
+        $modelo=new MEjercicio($idEjercicio,"","","");
+        $ejercicio=$modelo->selectID();
+        new VVerDetalleEjercicio($ejercicio);
+        break;
+    
+    case 'modificacion':
+        if(!isset($_REQUEST['idEjercicio'])){
+            $selectAll=new MEjercicio("","","","");
+            $listaEjercicios=$selectAll->select();
+            new VModificarEjercicio($listaEjercicios); //asi conseguimos la id del ejercicio a modificar 
+        }
+        elseif (!isset($_REQUEST['nombreEj']) && !isset($_REQUEST['descripcionEj']) && !isset($_REQUEST['tipoEj'])) {
+            $idEjercicio=$_REQUEST['idEjercicio'];
+            VModificarEjercicio::mostrarFormulario($idEjercicio); //luego se envia a un formulario para editar
+        }
+        else{
+            $idEjercicio=$_REQUEST['idEjercicio'];
+            $nombreEj=$_REQUEST['nombreEj'];
+            $descripcionEj=$_REQUEST['descripcionEj'];
+            $tipoEj=$_REQUEST['tipoEj'];
+
+            $ejercicio=new MEjercicio($idEjercicio,$nombreEj,$descripcionEj,$tipoEj);
+            $respuesta=$ejercicio->update();
+            new MESSAGE_View($respuesta,"../index.php");
+        }
+        break;
+}
 ?>
