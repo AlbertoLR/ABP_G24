@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `Nombre` VARCHAR(45) NOT NULL,
   `DNI` VARCHAR(9) NOT NULL,
   `Id_PerfilUsuario` INT NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`Id_usuario`),
   CONSTRAINT `fk_Usuario_PerfilUsuario`
     FOREIGN KEY (`Id_PerfilUsuario`)
@@ -244,6 +245,7 @@ CREATE TABLE IF NOT EXISTS `Ejercicio` (
   `idEjercicio` INT NOT NULL AUTO_INCREMENT,
   `nombreEj` VARCHAR(45) NOT NULL,
   `descripcionEj` VARCHAR(45) NULL,
+  `tipoEj` ENUM('aerobico','anaerobico','mixto') NOT NULL,
   PRIMARY KEY (`idEjercicio`))
 ENGINE = InnoDB;
 
@@ -297,11 +299,11 @@ insert into `PerfilUsuario` (`Id_PerfilUsuario`, `Tipo`) values
 -- dumping data for table `Usuario`
 --
 
-insert into `Usuario` (`Id_usuario`, `Nombre`, `DNI`, `Id_PerfilUsuario`) values
-(1, 'Alberto', '44488826H', 1),
-(2, 'Samuel', '46573898J', 2),
-(3, 'Iago', '12345678K', 3),
-(4, 'Amparo', '87654321J', 4);
+insert into `Usuario` (`Id_usuario`, `Nombre`, `DNI`, `Id_PerfilUsuario`,`password`) values
+(1, 'Alberto', '44488826H', 1,'cambiame'),
+(2, 'Samuel', '46573898J', 2,'cambiame'),
+(3, 'Iago', '12345678K', 3,'cambiame'),
+(4, 'Amparo', '87654321J', 4,'cambiame');
 
 
 --
@@ -345,11 +347,11 @@ insert into `Actividad` (`Id_Actividad`, `Nombre`, `Sala`, `Capacidad`, `HoraIni
 -- dumping data for table `Ejercicio`
 --
 
-insert into `Ejercicio` (`idEjercicio`, `nombreEj`, `descripcionEj`) values
-(1, 'abdominal', 'Baja tripa'),
-(2, 'flexion', 'besa el suelo'),
-(3, 'sentadilla', 'mueve el culo'),
-(4, 'marcha', 'circula leñe');
+insert into `Ejercicio` (`idEjercicio`, `nombreEj`, `descripcionEj`,`tipoEj`) values
+(1, 'abdominal', 'Baja tripa','aerobico'),
+(2, 'flexion', 'besa el suelo','aerobico'),
+(3, 'sentadilla', 'mueve el culo','anaerobico'),
+(4, 'marcha', 'circula leñe','anaerobico');
 
 
 --
