@@ -258,7 +258,9 @@ DROP TABLE IF EXISTS `EjercicioTabla` ;
 CREATE TABLE IF NOT EXISTS `EjercicioTabla` (
   `idTabla` INT NOT NULL,
   `idEjercicio` INT NOT NULL,
-  `cantidad` INT NOT NULL,
+  `tiempo` TIME(0),
+  `repeticion` INT,
+  `serie` INT,
   PRIMARY KEY (`idTabla`, `idEjercicio`),
   CONSTRAINT `fk_Tabla_has_Ejercicio_Tabla1`
     FOREIGN KEY (`idTabla`)
