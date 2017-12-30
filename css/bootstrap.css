@@ -125,6 +125,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
+  background-color: #0ff; 
 }
 button[disabled],
 html input[disabled] {
@@ -1183,6 +1184,7 @@ h6,
   font-weight: 500;
   line-height: 1.1;
   color: #fff;
+  text-shadow: 1px 1px #000000;
 }
 h1 small,
 h2 small,

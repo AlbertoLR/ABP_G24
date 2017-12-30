@@ -34,6 +34,24 @@ footer{
 	
 }
 
+.apartado{
+	margin: 10px;
+	color: black;
+}
+
+.apartado>label{
+	background-color: #0ff;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	font-size: 16;
+}
+
+.apartado>input{
+	margin-left: 10px;
+}
+
+
 .huge {
     font-size: 50px;
     line-height: normal;
