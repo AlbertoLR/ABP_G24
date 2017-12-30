@@ -4,7 +4,10 @@
  *
  * @author Samu
  */
-
+include "../layout/menus.php";
+include "../layout/footer.php";
+ 
+ 
 class VAltaUsuario{
     function __construct() {
         $this->render();
@@ -12,35 +15,56 @@ class VAltaUsuario{
     
     function render(){
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de alta de Usuario:</h2>
+<?php
+	menus();
+?>
+		<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Nuevo Usuario <small>Introduzca los datos</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+        
                 <form action="../controller/CUsuario.php" method="post">
-                    <div>
+                    <div class="apartado">
                         <label for="nombreUs">Nombre del Usuario:</label>
                         <input type="text" name="nombreUs" size="30"/>
                     </div>
-                    <div>
-                        <label for="DNIUs">DNI del usuario:</label><br>
+					<div class="apartado">
+                        <label for="apellidoUs">Apellidos del Usuario:</label>
+                        <input type="text" name="apellidoUs" size="30"/>
+                    </div>
+                    <div class="apartado">
+                        <label for="DNIUs">DNI del usuario:</label>
                         <input type="text" name="DNIUs" size="9"/>
-
                     </div>
-                      <input type='radio' name='Id_PerfilUsuario' value='1'> Administrador
-                      <input type='radio' name='Id_PerfilUsuario' value='2'>Entrenador
-                     <input type='radio' name='Id_PerfilUsuario' value='3'>Usuario
-                    <input type='radio' name='Id_PerfilUsuario' value='4'>Usuario1
-   
-                      
+					<div class="apartado">
+                        <label for="telefonoUs">Teléfono:</label>
+                        <input type="text" name="telefonoUs" size="12"/>
                     </div>
-                    <div>
-                        <button type="submit" name="action" value="alta">Enviar</button>
-                        <button type="reset" name="reset" value="Borrar">Borrar</button>
+					<div class="apartado">
+					 <label for="Id_PerfilUsuario">Perfil de Usuario:</label><br>	
+                     <input type='radio' name='Id_PerfilUsuario' value='1'><b> Administrador </b><br>
+                     <input type='radio' name='Id_PerfilUsuario' value='2'><b> Entrenador </b><br>
+                     <input type='radio' name='Id_PerfilUsuario' value='3'><b> Usuario TDU </b><br>
+                     <input type='radio' name='Id_PerfilUsuario' value='4'><b> Usuario PEF </b><br>  
+                    </div>
+                    <div class="apartado">
+                        <button type="submit" name="action" value="alta"><b>Enviar</b></button>
+                        <button type="reset" name="reset" value="Borrar"><b>Borrar</b></button>
                     </div>
                 </form>
-            </body>
-	</html>
+           
 <?php
+	footer();
     }
+	
 }
 ?>
