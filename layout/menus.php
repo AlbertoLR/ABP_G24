@@ -14,16 +14,16 @@ function menus(){
     <title>Gimnasio de ABP</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="../css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
+    <link href="../css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">¡
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">¡
 
 </head>
  <body>
@@ -137,7 +137,7 @@ function menus(){
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="core/Desconexion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a>
+                            <a href="../core/Desconexion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a>
                         </li>
                     </ul>
                 </li>
@@ -146,7 +146,7 @@ function menus(){
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.php"><i class="inicio"></i>Inicio</a>
+                        <a href="../index.php"><i class="inicio"></i>Inicio</a>
                     </li>';
 
     if($_SESSION['Id_PerfilUsuario']==1){
@@ -154,16 +154,16 @@ function menus(){
                         <a href="javascript:;" data-toggle="collapse" data-target="#usuario"><i class="user"></i> Usuarios <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="usuario" class="collapse">
                             <li>
-                                <a href="controller/CUsuario.php?action=alta" >Nuevo Usuario</a>
+                                <a href="../controller/CUsuario.php?action=alta" >Nuevo Usuario</a>
                             </li>
                             <li>
-                                <a href="controller/CUsuario.php?action=modificacion">Modificar Usuario</a>
+                                <a href="../controller/CUsuario.php?action=modificacion">Modificar Usuario</a>
                             </li>
 							<li>
-                                <a href="controller/CUsuario.php?action=baja">Borrar Usuario</a>
+                                <a href="../controller/CUsuario.php?action=baja">Borrar Usuario</a>
                             </li>
 							<li>
-                                <a href="controller/CUsuario.php?action=consulta">Buscar Usuario</a>
+                                <a href="../controller/CUsuario.php?action=consulta">Buscar Usuario</a>
                             </li>
                         </ul>
                     </li>
@@ -171,16 +171,16 @@ function menus(){
                         <a href="javascript:;" data-toggle="collapse" data-target="#actividad"><i class="activity"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="actividad" class="collapse">
                             <li>
-                                <a href="controller/CActividad2.php?action=alta" >Nueva Actividad</a>
+                                <a href="../controller/CActividad2.php?action=alta" >Nueva Actividad</a>
                             </li>
                             <li>
-                                <a href="controller/CActividad2.php?action=modificacion">Modificar Actividad</a>
+                                <a href="../controller/CActividad2.php?action=modificacion">Modificar Actividad</a>
                             </li>
 							<li>
-                                <a href="controller/CActividad2.php?action=baja">Borrar Actividad</a>
+                                <a href="../controller/CActividad2.php?action=baja">Borrar Actividad</a>
                             </li>
 							<li>
-                                <a href="controller/CActividad2.php?action=consulta">Buscar Actividad</a>
+                                <a href="../controller/CActividad2.php?action=consulta">Buscar Actividad</a>
                             </li>
 							</ul>
                     </li>
@@ -188,16 +188,16 @@ function menus(){
                         <a href="javascript:;" data-toggle="collapse" data-target="#recurso"><i class="resource"></i> Recursos <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="recurso" class="collapse">
                             <li>
-                                <a href="controller/CRecurso.php?action=alta" >Nuevo Recurso</a>
+                                <a href="../controller/CRecurso.php?action=alta" >Nuevo Recurso</a>
                             </li>
                             <li>
-                                <a href="controller/CRecurso.php?action=modificacion">Modificar Recurso</a>
+                                <a href="../controller/CRecurso.php?action=modificacion">Modificar Recurso</a>
                             </li>
 							<li>
-                                <a href="controller/CRecurso.php?action=baja">Borrar Recurso</a>
+                                <a href="../controller/CRecurso.php?action=baja">Borrar Recurso</a>
                             </li>
 							<li>
-                                <a href="controller/CRecurso.php?action=consulta">Buscar Recurso</a>
+                                <a href="../controller/CRecurso.php?action=consulta">Buscar Recurso</a>
                             </li>
                         </ul>
                     </li>';
