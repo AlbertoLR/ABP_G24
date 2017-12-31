@@ -11,36 +11,54 @@ class VAltaEjercicio{
     }
     
     function render(){
+	menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de alta de ejercicio:</h2>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Nuevo Ejercicio <small>Introduzca los datos</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+        
                 <form action="../controller/CEjercicio.php" method="post">
-                    <div>
-                        <label for="nombreEj">Nombre del ejercicio:</label>
-                        <input type="text" name="nombreEj" size="30"/>
+                    <div class="apartado">
+                        <label for="nombreEj">Nombre del Ejercicio:</label>
+                        <input type="text" name="nombreEj" size="45"/>
                     </div>
-                    <div>
-                        <label for="descripcionEj">Descripcion del ejercicio:</label><br>
-                        <textarea name="descripcionEj">Escribir descripcion aqui</textarea>
+					<div class="apartado">
+                        <label for="descripcionEj">Descripcion del Ejercicio:</label>
+                        <input type="text" name="descripcionEj" size="45"/>
                     </div>
-                    <div>
-                        <label for="tipoEj">Tipo de ejercicio:</label><br>
-                        <select name="tipoEj">
-                            <option value="aerobico">Aerobico</option>
-                            <option value="anaerobico">Anaerobico</option>
-                            <option value="mixto">Ej. mixto</option>
-                        </select>
+                    
+                    <div class="apartado">
+			<label for="tipoEj">Tipo de Ejercicio:</label><br>	
+                        <input type='radio' name='tipoEj' value='aerobico'><b> Aerobico </b><br>
+                        <input type='radio' name='tipoEj' value='anaerobico'><b> Anaerobico </b><br>
+                        <input type='radio' name='tipoEj' value='mixto'><b> Mixto </b><br>
                     </div>
-                    <div>
-                        <button type="submit" name="action" value="alta">Enviar</button>
-                        <button type="reset" name="reset" value="Borrar">Borrar</button>
+                    <div class="apartado">
+                        <button type="submit" name="action" value="alta"><b>Enviar</b></button>
+                        <button type="reset" name="reset" value="Borrar"><b>Borrar</b></button>
                     </div>
                 </form>
-            </body>
-	</html>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CEjercicio.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
+           
 <?php
+	footer();
     }
 }
 ?>

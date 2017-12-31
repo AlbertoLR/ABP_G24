@@ -97,32 +97,34 @@ class MEjercicio {
     }
     
     function select(){
-        if($this->nombreEj==""){ //si se hace un select con campo vacio se entiende como un SHOWALL
+        if($this->nombreEj=="" && $this->tipoEj==""){ //si se hace un select con campos vacio se entiende como un SHOWALL
             $sql="SELECT * FROM Ejercicio";
             $resultado=$this->mysqli->query($sql);
             return $resultado;
         }
         else{
-            $sql="SELECT * FROM Ejercicio WHERE nombreEj LIKE '%$this->nombreEj%'";
-            if(($resultado=$this->mysqli->query($sql))){
-                return $resultado;
+            $sql="SELECT * FROM Ejercicio WHERE ";
+            $segundo=FALSE;
+            if($this->nombreEj<>""){
+                $sql.="nombreEj LIKE '%$this->nombreEj%'";
+                $segundo=TRUE;
             }
-            else{
-                return "La busqueda no ha devuelto resultado";
+            if($this->tipoEj<>""){
+                if($segundo){
+                    $sql.=" AND ";
+                }
+                $sql.="tipoEj='$this->tipoEj'";
+                $segundo=TRUE;
             }
         }
-    }
-    
-    function selectTipo(){
-        $sql="SELECT * FROM Ejercicio WHERE tipoEj='$this->tipoEj'";
-        if(($resultado=$this->mysqli->query($sql))){
+        if (!($resultado = $this->mysqli->query($sql))){
+                return 'Error en la consulta sobre la base de datos';
+            }
+        else{
             return $resultado;
         }
-        else{
-            return "La busqueda no ha devuelto resultado";
-        }
     }
-            
+
     function selectID(){
         $sql="SELECT * FROM Ejercicio WHERE idEjercicio='$this->idEjercicio'";
         if(($resultado=$this->mysqli->query($sql))){

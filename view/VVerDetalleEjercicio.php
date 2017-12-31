@@ -10,20 +10,46 @@ class VVerDetalleEjercicio {
     }
     
     function render($ejercicio){
+        menus();
 ?>
-        <html>
-            <head>
-                <title>Ver ejercicio</title>
-            </head>
-            <body>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Detalle ejercicio
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                
+                <table class="table">
+                    <tr>
+                        <td><b>Nombre</b></td>
+                        <td><?=$ejercicio[1]?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Tipo</b></td>
+                        <td><?=$ejercicio[3]?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Descripcion</b></td>
+                        <td><?=$ejercicio[2]?></td>
+                    </tr>
+                </table>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CEjercicio.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
 <?php
-        echo "<h2>Ejercicio $ejercicio[1]:</h2>";
-        echo "<p>Tipo de ejercicio: $ejercicio[3]</p>";
-        echo "<p>Descripcion:<br>$ejercicio[2]</p>";
-?>
-            </body>
-	</html>
-<?php
+	footer();
     }
 }
 ?>

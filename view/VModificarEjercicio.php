@@ -6,72 +6,60 @@
  */
 
 class VModificarEjercicio{
-    function __construct($listaEjercicios) {
-        $this->render($listaEjercicios);
+    function __construct($idEjercicio) {
+        $this->render($idEjercicio);
     }
     
-    function render($listaEjercicios){
+    function render($idEjercicio){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Seleccione el ejercicio a modificar:</h2>
-                <form action="../controller/CEjercicio.php" method="post">
-                    <div>
-                        <p>Selecione la ID del ejercicio a modifiacar:</p>
-<?php
-        $tupla=$listaEjercicios->fetch_row();
-        do{
-            echo "<input type='radio' name='idEjercicio' value='$tupla[0]'> $tupla[1]<br>";
-            $tupla=$listaEjercicios->fetch_row();
-        }while(!is_null($tupla));
-?>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="modificacion">Enviar</button>
-                    </div>
-                </form>
-            </body>
-        </html>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
 
-<?php
-    }
-    
-    static function mostrarFormulario($idEjercicio){
-?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de modificacion del ejercicio:</h2>
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Nuevo Ejercicio <small>Introduzca los datos</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+        
                 <form action="../controller/CEjercicio.php" method="post">
-<?php
-        echo "<input type='hidden' name='idEjercicio' value='$idEjercicio'/>";
-?>
-                    <div>
-                        <label for="nombreEj">Nombre del ejercicio:</label>
-                        <input type="text" name="nombreEj" size="30"/>
+                    <input type='hidden' name='idEjercicio' value='<?=$idEjercicio?>'/>
+                    <div class="apartado">
+                        <label for="nombreEj">Nombre del Ejercicio:</label>
+                        <input type="text" name="nombreEj" size="45"/>
                     </div>
-                    <div>
-                        <label for="descripcionEj">Descripcion del ejercicio:</label><br>
-                        <textarea name="descripcionEj">Escribir descripcion aqui</textarea>
+					<div class="apartado">
+                        <label for="descripcionEj">Descripcion del Ejercicio:</label>
+                        <input type="text" name="descripcionEj" size="45"/>
                     </div>
-                    <div>
-                        <label for="tipoEj">Tipo de ejercicio:</label><br>
-                        <select name="tipoEj">
-                            <option value="aerobico">Aerobico</option>
-                            <option value="anaerobico">Anaerobico</option>
-                            <option value="mixto">Ej. mixto</option>
-                        </select>
+                    
+                    <div class="apartado">
+			<label for="tipoEj">Tipo de Ejercicio:</label><br>	
+                        <input type='radio' name='tipoEj' value='aerobico'><b> Aerobico </b><br>
+                        <input type='radio' name='tipoEj' value='anaerobico'><b> Anaerobico </b><br>
+                        <input type='radio' name='tipoEj' value='mixto'><b> Mixto </b><br>
                     </div>
-                    <div>
-                        <button type="submit" name="action" value="modificacion">Enviar</button>
-                        <button type="reset" name="reset" value="Borrar">Borrar</button>
+                    <div class="apartado">
+                        <button type="submit" name="action" value="modificacion"><b>Enviar</b></button>
+                        <button type="reset" name="reset" value="Borrar"><b>Borrar</b></button>
                     </div>
                 </form>
-            </body>
-	</html>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CEjercicio.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
+           
 <?php
+	footer();
     }
 }
 ?>

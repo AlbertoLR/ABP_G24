@@ -6,84 +6,49 @@
  */
 
 class VBajaEjercicio{
-    function __construct($listaEjercicios) {
-        $this->render($listaEjercicios);
+    function __construct($ejercicioBorrar) {
+        $this->render($ejercicioBorrar);
     }
     
-    function render($listaEjercicios){
+    function render($ejercicioBorrar){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Seleccione el ejercicio a borrar:</h2>
-                <form action="../controller/CEjercicio.php" method="post">
-                    <div>
-                        <p>Selecione la ID del ejercicio a borrar:</p>
-<?php
-        $tupla=$listaEjercicios->fetch_row();
-        do{
-            echo "<input type='radio' name='idEjercicio' value='$tupla[0]'> $tupla[1]<br>";
-            $tupla=$listaEjercicios->fetch_row();
-        }while(!is_null($tupla));
-?>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="baja">Enviar</button>
-                    </div>
-                </form>
-            </body>
-        </html>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
 
-<?php
-    }
-    
-    static function solicitarConfirmacion($ejercicioBorrar){
-?>
-        <html>
-            <head></head>
-            <body>
-                <h2>¿Desea borrar este ejercicio?</h2>
-                <table>
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Borrar ejercicio
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                
+                <table class="table">
                     <tr>
-                        <td>Id del ejercicio:</td>
-<?php
-        echo "<td>$ejercicioBorrar[0]</td>";
-?>
+                        <td><b>Nombre</b></td>
+                        <td><?=$ejercicioBorrar[1]?></td>
                     </tr>
                     <tr>
-                        <td>Nombre del ejercicio:</td>
-<?php
-        echo "<td>$ejercicioBorrar[1]</td>";
-?>
+                        <td><b>Tipo</b></td>
+                        <td><?=$ejercicioBorrar[3]?></td>
                     </tr>
                     <tr>
-                        <td>Descripcion del ejercicio:</td>
-<?php
-        echo "<td>$ejercicioBorrar[2]</td>";
-?>
-                    </tr>
-                    <tr>
-                        <td>Tipo de ejercicio:</td>
-<?php
-        echo "<td>$ejercicioBorrar[3]</td>";
-?>
+                        <td><b>Descripcion</b></td>
+                        <td><?=$ejercicioBorrar[2]?></td>
                     </tr>
                 </table>
-                <br><br>
-                <form action="../controller/CEjercicio.php" method="POST">
-<?php
-        echo "<input type='hidden' name='idEjercicio' value='$ejercicioBorrar[0]'/>";
-        echo "<input type='hidden' name='action' value='baja'/>";
-?>
-                    <div>
-                        <button type="submit" name="confirmar" value="si">Si</button>
-                        <button type="submit" name="confirmar" value="no">No</button>
-                    </div>
+                
+                <form action="../controller/CEjercicio.php?action=baja" method="post">
+                    <input type='hidden' name='idEjercicio' value='<?=$ejercicioBorrar[0]?>'/>
+                    <button type="submit" name="confirmar" value="si"><img src="../images/confirm.png" width="4%" alt="confirm"/></button>
+                    <button type="submit" name="confirmar" value="no"><img src="../images/cancel.png" width="4%" alt="cancel"/></button>
                 </form>
-            </body>
-        </html>
 <?php
+	footer();
     }
 }
 ?>
