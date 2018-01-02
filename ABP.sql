@@ -168,7 +168,7 @@ INSERT INTO `Ejercicio` (`idEjercicio`, `nombreEj`, `descripcionEj`, `tipoEj`) V
 CREATE TABLE `EjercicioTabla` (
   `idTabla` int(11) NOT NULL,
   `idEjercicio` int(11) NOT NULL,
-  `tiempo` time DEFAULT NULL,
+  `tiempo` varchar(30) DEFAULT NULL,
   `repeticion` int(11) DEFAULT NULL,
   `serie` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -285,18 +285,19 @@ CREATE TABLE `Usuario` (
   `Nombre` varchar(45) NOT NULL,
   `DNI` varchar(9) NOT NULL,
   `Id_PerfilUsuario` int(11) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `Id_entrenador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Usuario`
 --
 
-INSERT INTO `Usuario` (`Id_usuario`, `Nombre`, `DNI`, `Id_PerfilUsuario`, `password`) VALUES
-(1, 'Alberto', '44488826H', 1, 'cambiame'),
-(2, 'Samuel', '46573898J', 2, 'cambiame'),
-(3, 'Iago', '12345678K', 3, 'cambiame'),
-(4, 'Amparo', '87654321J', 4, 'cambiame');
+INSERT INTO `Usuario` (`Id_usuario`, `Nombre`, `DNI`, `Id_PerfilUsuario`, `password`,`Id_entrenador`) VALUES
+(1, 'Alberto', '44488826H', 1, 'cambiame',NULL),
+(2, 'Samuel', '46573898J', 2, 'cambiame',NULL),
+(3, 'Iago', '12345678K', 3, 'cambiame',2),
+(4, 'Amparo', '87654321J', 4, 'cambiame',2);
 
 --
 -- Índices para tablas volcadas
