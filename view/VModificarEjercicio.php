@@ -21,7 +21,7 @@ class VModificarEjercicio{
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Nuevo Ejercicio <small>Introduzca los datos</small>
+                            Editar Ejercicio <small>Introduzca los datos</small>
                         </h1>
                     </div>
                 </div>

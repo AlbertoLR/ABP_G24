@@ -6,29 +6,53 @@
  */
 
 class VConsultarTabla {
-    function __construct($tablas) {
-        $this->render($tablas);
+    function __construct() {
+        $this->render();
     }
     
-    function render($tablas){
+    function render(){
+        menus();
 ?>
-        <html>
-            <head>
-                <title>Ver tablas</title>
-            </head>
-            <body>
-                <h2>Tablas del usuario:</h2>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Buscar Tabla <small>Introduzca los datos</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+        
+                <form action="../controller/CTabla.php" method="post">
+                    <div class="apartado">
+                        <label for="nombreTabla">Nombre de la Tabla:</label>
+                        <input type="text" name="nombreTabla" size="45"/>
+                    </div>
+                    <div class="apartado">
+			<label for="tipoTabla">Tipo de Tabla:</label><br>	
+                        <input type='radio' name='tipoTabla' value='Predeterminada'><b> Predeterminada </b><br>
+                        <input type='radio' name='tipoTabla' value='Personalizada'><b> Personalizada </b><br>
+                    </div>
+                    <div class="apartado">
+                        <button type="submit" name="action" value="consulta"><b>Enviar</b></button>
+                        <button type="reset" name="reset" value="Borrar"><b>Borrar</b></button>
+                    </div>
+                </form>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CTabla.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
+           
 <?php
-        $tupla=$tablas->fetch_row();
-        do{
-            echo "<p><a href='../controller/CTabla.php?action=verDetalle&idTabla=$tupla[0]'>$tupla[1]</a></p>";
-            $tupla=$tablas->fetch_row();
-        }while(!is_null($tupla));
-?>
-                </table>
-            </body>
-        </html>
-<?php
+	footer();
     }
 }
 ?>

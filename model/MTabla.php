@@ -58,6 +58,12 @@ class MTabla {
         $this->mysqli->query($sql);
         return "Borrado correctamente";
     }
+    
+    function deleteAsignacionTabla(){
+        $sql = "DELETE FROM AsignacionTabla WHERE (idTabla='$this->idTabla')";
+        $this->mysqli->query($sql);
+        return "Borrado correctamente";
+    }
             
     function update(){
         $sql="SELECT * FROM Tabla WHERE idTabla='$this->idTabla'";
@@ -69,13 +75,8 @@ class MTabla {
             }
             else{
                 $nombreTabla= $this->nombreTabla;
-            }if($this->tipoTabla==""){ //si descripcion esta vacia se le añade el q ya tiene
-                $tipoTabla=$tupla[2];
             }
-            else{
-                $tipoTabla= $this->tipoTabla;
-            }
-            $sql = "UPDATE Tabla SET nombre='$nombreTabla',tipoTabla='$tipoTabla' WHERE idTabla=$this->idTabla";
+            $sql = "UPDATE Tabla SET nombre='$nombreTabla' WHERE idTabla=$this->idTabla";
             $this->mysqli->query($sql);
             return "Modificado correctamente";
         }
@@ -84,30 +85,25 @@ class MTabla {
         }
     }
     
-    function select(){
-        $soloEste=TRUE;
-        $sql="SELECT * FROM Tabla WHERE ";
-        if($this->tipoTabla<>""){
-            $sql.="tipoTabla='$this->tipoTabla'";
-            $soloEste=FALSE;
+    function select($idEntrenador){
+        if($this->nombreTabla=="" && $this->tipoTabla==""){
+            $sql="SELECT * FROM Tabla WHERE tipoTabla='Predeterminada' UNION SELECT Tabla.* FROM Tabla,AsignacionTabla,Usuario WHERE Tabla.tipoTabla='Personalizada' AND Tabla.idTabla=AsignacionTabla.idTabla AND AsignacionTabla.idUsuario=Usuario.Id_usuario AND Usuario.Id_entrenador='$idEntrenador'";
         }
-        if($this->nombreTabla<>""){
-            if(!$soloEste){
-                $sql.=" AND ";
+        elseif($this->nombreTabla<>"" && $this->tipoTabla==""){
+            $sql="SELECT * FROM Tabla WHERE tipoTabla='Predeterminada' AND nombre LIKE '%$this->nombreTabla%' UNION SELECT Tabla.* FROM Tabla,AsignacionTabla,Usuario WHERE Tabla.tipoTabla='Personalizada' AND Tabla.nombre='$this->nombreTabla' AND Tabla.idTabla=AsignacionTabla.idTabla AND AsignacionTabla.idUsuario=Usuario.Id_usuario AND Usuario.Id_entrenador='$idEntrenador'";
+        }
+        elseif($this->tipoTabla=="Predeterminada"){
+            $sql="SELECT * FROM Tabla WHERE tipoTabla='$this->tipoTabla'";
+            if($this->nombreTabla<>""){
+                $sql.=" AND nombre LIKE '%$this->nombreTabla%'";
             }
-            $sql.="nombre LIKE '%$this->nombreTabla%'";
-            $soloEste=FALSE;
         }
-        if(($resultado=$this->mysqli->query($sql))){
-            return $resultado;
+        elseif($this->tipoTabla=="Personalizada"){
+            $sql="SELECT Tabla.* FROM Tabla,AsignacionTabla,Usuario WHERE Tabla.tipoTabla='$this->tipoTabla' AND Tabla.idTabla=AsignacionTabla.idTabla AND AsignacionTabla.idUsuario=Usuario.Id_usuario AND Usuario.Id_entrenador='$idEntrenador'";
+            if($this->nombreTabla<>""){
+                $sql.=" AND Tabla.nombre LIKE '%$this->nombreTabla%'";
+            }
         }
-        else{
-            return "La busqueda no ha devuelto resultado";
-        }
-    }
-    
-    function selectAll(){
-        $sql="SELECT * FROM Tabla";
         if(($resultado=$this->mysqli->query($sql))){
             return $resultado;
         }
@@ -138,14 +134,44 @@ class MTabla {
             return "La busqueda no ha devuelto resultado";
         }
     }
+    
+    function selectUser($idUsuario){
+        $sql="SELECT Tabla.* FROM Tabla,AsignacionTabla,Usuario WHERE Tabla.idTabla=AsignacionTabla.idTabla AND AsignacionTabla.idUsuario=Usuario.Id_usuario AND Usuario.Id_usuario='$idUsuario'";
+        if(($resultado=$this->mysqli->query($sql))){
+            return $resultado;
+        }
+        else{
+            return "La busqueda no ha devuelto resultado";
+        }
+    }
+    
+    function selectAsignacionesPEF($idEntrenador){
+        $sql="SELECT Tabla.idTabla,Tabla.nombre,Tabla.tipoTabla,Usuario.Nombre,Usuario.DNI,Usuario.Id_usuario FROM Tabla,AsignacionTabla,Usuario WHERE Tabla.idTabla=AsignacionTabla.idTabla AND AsignacionTabla.idUsuario=Usuario.Id_usuario AND Usuario.Id_entrenador='$idEntrenador'";
+        if(($resultado=$this->mysqli->query($sql))){
+            return $resultado;
+        }
+        else{
+            return "La busqueda no ha devuelto resultado";
+        }
+    }
+    
+    function selectAsignacionesNorm(){
+        $sql="SELECT Tabla.idTabla,Tabla.nombre,Tabla.tipoTabla,Usuario.Nombre,Usuario.DNI,Usuario.Id_usuario FROM Tabla,AsignacionTabla,Usuario WHERE Tabla.idTabla=AsignacionTabla.idTabla AND AsignacionTabla.idUsuario=Usuario.Id_usuario AND Usuario.Id_PerfilUsuario='4'";
+        if(($resultado=$this->mysqli->query($sql))){
+            return $resultado;
+        }
+        else{
+            return "La busqueda no ha devuelto resultado";
+        }
+    }
         
     //asigna un ej a una tabla
-    function asignarEjercicio($idEjercicio,$cantidad){
+    function asignarEjercicio($idEjercicio,$tiempo,$repeticion,$serie){
         if($this->idTabla<>"" && $idEjercicio<>""){ //el campo nombre no esta vacio
             $sql="SELECT * FROM EjercicioTabla WHERE idTabla='$this->idTabla' AND idEjercicio='$idEjercicio'";
             $resultado= $this->mysqli->query($sql);
             if ($resultado->num_rows==0) { //comprobamos q no exita ya
-                $sql = "INSERT INTO EjercicioTabla (idTabla,idEjercicio,cantidad) VALUES ('$this->idTabla','$idEjercicio','$cantidad')";
+                $sql = "INSERT INTO EjercicioTabla (idTabla,idEjercicio,tiempo,repeticion,serie) VALUES ('$this->idTabla','$idEjercicio','$tiempo','$repeticion','$serie')";
                 $this->mysqli->query($sql);
                 return "Inserción realizada con éxito";
             }
@@ -190,22 +216,10 @@ class MTabla {
             return "No se encuentra el usuario";
         }
     }
-
-
-    //devuelve los usuarios q tienen asignados la tabla
-    function usersTabla(){
-        $sql="SELECT AsignacionTabla.idUsuario,Usuario.Nombre FROM AsignacionTabla,Usuario WHERE AsignacionTabla.idUsuario=Usuario.Id_usuario AND AsignacionTabla.idTabla='$this->idTabla'";
-        if($resultado= $this->mysqli->query($sql)){
-            return $resultado;
-        }
-        else{
-            return "El usuario no tiene asignado tablas";
-        }
-    }
     
     //devuelve los ejercicios q tienen asignados la tabla
     function ejsTabla(){
-        $sql="SELECT EjercicioTabla.idEjercicio,Ejercicio.nombreEj,EjercicioTabla.cantidad FROM Ejercicio,EjercicioTabla WHERE Ejercicio.idEjercicio=EjercicioTabla.idEjercicio AND EjercicioTabla.idTabla='$this->idTabla'";
+        $sql="SELECT Ejercicio.idEjercicio,Ejercicio.nombreEj,Ejercicio.tipoEj,EjercicioTabla.tiempo,EjercicioTabla.repeticion,EjercicioTabla.serie FROM Ejercicio,EjercicioTabla,Tabla WHERE Ejercicio.idEjercicio=EjercicioTabla.idEjercicio AND EjercicioTabla.idTabla=Tabla.idTabla AND Tabla.idTabla='$this->idTabla'";
         if($resultado= $this->mysqli->query($sql)){
             return $resultado;
         }
@@ -214,14 +228,24 @@ class MTabla {
         }
     }
     
-    //devuelve el total de usuarios
-    function usuarios(){
-        $sql="SELECT * FROM Usuario";
+    //devuelve los usuarios q tiene asignado este entrenador
+    function usuariosPropios($idEntrenador){
+        $sql="SELECT * FROM Usuario WHERE Id_entrenador='$idEntrenador'";
         if($resultado= $this->mysqli->query($sql)){
             return $resultado;
         }
         else{
-            return "El usuario no tiene asignado tablas";
+            return "El entrenador no tiene asignado usuarios";
+        }
+    }
+    
+    function usuariosNormales(){
+        $sql="SELECT * FROM Usuario WHERE Id_PerfilUsuario=4";
+        if($resultado= $this->mysqli->query($sql)){
+            return $resultado;
+        }
+        else{
+            return "No hay usuarios normales";
         }
     }
     

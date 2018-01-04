@@ -5,50 +5,88 @@
  * @author iago
  */
 class VVerDetalleTabla {
-    function __construct($tabla,$ejercicios,$usuarios) {
-        $this->render($tabla,$ejercicios,$usuarios);
+    function __construct($tabla,$ejercicios) {
+        $this->render($tabla,$ejercicios);
     }
     
-    function render($tabla,$ejercicios,$usuarios){
+    function render($tabla,$ejercicios){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-<?php
-        echo "<h2>Tabla $tabla[1]:</h2>";
-        echo "<p>Tipo de tabla: $tabla[2]</p>";
-?>
-                <p>Ejercicios de la tabla:</p>
-                <table>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Ver detalle tabla
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+                
+                <table class="table">
                     <tr>
-                        <td>Nombre ejercicio</td>
-                        <td>Num repeticiones</td>
+                        <td><b>Nombre</b></td>
+                        <td><?=$tabla[1]?></td>
                     </tr>
+                    <tr>
+                        <td><b>Tipo</b></td>
+                        <td><?=$tabla[2]?></td>
+                    </tr>
+                </table>
+                
+                <div class="col-lg-12">
+                    <h2 class="panel-title">Ejercicios de la tabla</h2>
+                </div>
+                
+                <table class="table">
+                    <thead>
+			<tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Tiempo</th>
+                            <th>Repeticiones</th>
+                            <th>Series</th>
+			</tr>
+                    </thead>
+                    <tbody>
 <?php
         $tupla=$ejercicios->fetch_row();
-        do{
-            echo "<tr><td><a href='../controller/CEjercicio.php?idEjercicio=$tupla[0]&action=verDetalle'>$tupla[1]</a></td>";
-            echo "<td>$tupla[2]</td></tr>";
-            $tupla=$ejercicios->fetch_row();
-        }while(!is_null($tupla));
+        if($tupla!=null){
+            do{
 ?>
-                </table>
-<?php
-        $string="<p>Usuarios con esta tabla asignada: ";
-        $tupla=$usuarios->fetch_row();
-        do{
-            $string.="$tupla[1]";
-            $tupla=$usuarios->fetch_row();
-            if(!is_null($tupla)){
-                $string.=", ";
-            }
-        }while(!is_null($tupla));
-        $string.=".</p>";
-        echo "$string";
+                        <tr>
+                            <td>
+                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>"><?=$tupla[1]?></a>
+                            </td>
+                            <td><?= $tupla[2]?></td>
+                            <td><?= $tupla[3]?></td>
+                            <td><?= $tupla[4]?></td>
+                            <td><?= $tupla[5]?></td>
+                        </tr>
+<?php 
+                $tupla=$ejercicios->fetch_row();
+        }
+        while(!is_null($tupla));
+    }
 ?>
-            </body>
-        </html>
+                    </tbody>
+               </table>
 <?php
+        if($_SESSION['Id_PerfilUsuario']==2){
+?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CTabla.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
+<?php
+        }
+	footer();
     }
 }
 ?>

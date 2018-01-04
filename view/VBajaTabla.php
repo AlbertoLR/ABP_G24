@@ -6,76 +6,83 @@
  */
 
 class VBajaTabla {
-    function __construct($listaTablas) {
-        $this->render($listaTablas);
+    function __construct($tablaBorrar,$ejercicios) {
+        $this->render($tablaBorrar,$ejercicios);
     }
     
-    function render($listaTablas){
+    function render($tablaBorrar,$ejercicios){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Seleccione la tabla a borrar:</h2>
-                <form action="../controller/CTabla.php" method="post">
-                    <div>
-                        <p>Selecione la ID de la tabla a borrar:</p>
-<?php
-        $tupla=$listaTablas->fetch_row();
-        do{
-            echo "<input type='radio' name='idTabla' value='$tupla[0]'>$tupla[0] -> $tupla[1]<br>";
-            $tupla=$listaTablas->fetch_row();
-        }while(!is_null($tupla));
-?>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Borrar tabla
+                        </h1>
                     </div>
-                    <div>
-                        <button type="submit" name="action" value="baja">Enviar</button>
-                    </div>
-                </form>
-            </body>
-        </html>
-<?php
-    }
-    
-    static function solicitarConfirmacion($tablaBorrar){
-?>
-        <html>
-            <head></head>
-            <body>
-                <h2>¿Desea borrar esta tabla?</h2>
-                <table>
+                </div>
+                <!-- /.row -->
+                
+                <table class="table">
                     <tr>
-                        <td>Id de la tabla:</td>
-<?php
-        echo "<td>$tablaBorrar[0]</td>";
-?>
+                        <td><b>Nombre</b></td>
+                        <td><?=$tablaBorrar[1]?></td>
                     </tr>
                     <tr>
-                        <td>Nombre de la tabla:</td>
-<?php
-        echo "<td>$tablaBorrar[1]</td>";
-?>
-                    </tr>
-                    <tr>
-                        <td>Tipo de tabla:</td>
-<?php
-        echo "<td>$tablaBorrar[2]</td>";
-?>
+                        <td><b>Tipo</b></td>
+                        <td><?=$tablaBorrar[2]?></td>
                     </tr>
                 </table>
-                <br><br>
-                <form action="../controller/CTabla.php" method="POST">
+                
+                <div class="col-lg-12">
+                    <h2 class="panel-title">Ejercicios de la tabla</h2>
+                </div>
+                
+                <table class="table">
+                    <thead>
+			<tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Tiempo</th>
+                            <th>Repeticiones</th>
+                            <th>Series</th>
+			</tr>
+                    </thead>
+                    <tbody>
 <?php
-        echo "<input type='hidden' name='idTabla' value='$tablaBorrar[0]'/>";
-        echo "<input type='hidden' name='action' value='baja'/>";
+        $tupla=$ejercicios->fetch_row();
+        if($tupla!=null){
+            do{
 ?>
-                    <div>
-                        <button type="submit" name="confirmar" value="si">Si</button>
-                        <button type="submit" name="confirmar" value="no">No</button>
-                    </div>
+                        <tr>
+                            <td>
+                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>"><?=$tupla[1]?></a>
+                            </td>
+                            <td><?= $tupla[2]?></td>
+                            <td><?= $tupla[3]?></td>
+                            <td><?= $tupla[4]?></td>
+                            <td><?= $tupla[5]?></td>
+                        </tr>
+<?php 
+                $tupla=$ejercicios->fetch_row();
+        }
+        while(!is_null($tupla));
+    }
+?>
+                    </tbody>
+               </table>
+                
+                <form action="../controller/CTabla.php?action=baja" method="post">
+                    <input type='hidden' name='idTabla' value='<?=$tablaBorrar[0]?>'/>
+                    <button type="submit" name="confirmar" value="si"><img src="../images/confirm.png" width="4%" alt="confirm"/></button>
+                    <button type="submit" name="confirmar" value="no"><img src="../images/cancel.png" width="4%" alt="cancel"/></button>
                 </form>
-            </body>
-        </html>
 <?php
+	footer();
     }
 }
 ?>

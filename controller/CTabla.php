@@ -16,7 +16,17 @@ include '../view/VModificarTabla.php';
 include '../view/VConsultarTabla.php';
 include '../view/VVerDetalleTabla.php';
 include '../view/VAsignarEjercicio.php';
+include '../view/VPedirCantidadesEj.php';
+include '../view/VPrincipalTabla.php';
+include '../view/VAsigOCrearTabla.php';
 include '../view/VAsignarUsuario.php';
+include '../view/VDesasignarUser.php';
+include '../view/VCargarAlta.php';
+include '../view/VCargarAltaPEF.php';
+include '../view/VVerTabla.php';
+include '../view/VShowAllTabla.php';
+include '../view/VCargarVerAsignacion.php';
+include '../view/VVerAsignacion.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -25,158 +35,253 @@ estaRegistrado();
 switch ($_REQUEST['action']){
     case 'alta':
         if(!isset($_REQUEST['nombreTabla']) || !isset($_REQUEST['tipoTabla'])){
-            new VAltaTabla();
+            if(isset($_POST['Id_usuario'])) $idUser=$_POST['Id_usuario'];
+            else $idUser=NULL;
+            new VAltaTabla($idUser);
         }
         else{
-            $nombreTabla=$_REQUEST['nombreTabla'];
-            $tipoTabla=$_REQUEST['tipoTabla'];
+            $nombreTabla=$_POST['nombreTabla'];
+            $tipoTabla=$_POST['tipoTabla'];
 
-            $tabla=new MTabla("",$nombreTabla,$tipoTabla);
-            $respuesta=$tabla->insert();
+            $modelo=new MTabla("",$nombreTabla,$tipoTabla);
+            $respuesta=$modelo->insert();
             
-            $volver="../index.php";
-            if($respuesta=="Inserción realizada con éxito"){
-                $tupla=$tabla->selectNombre();
-                $idTabla=$tupla[0];
-                $volver="../controller/CTabla.php?action=asignarEj&idTabla=$idTabla";
+            if(isset($_POST['Id_usuario']) && $respuesta="Inserción realizada con éxito"){
+                $idUser=$_POST['Id_usuario'];
+                $tabla=$modelo->selectNombre();
+                $idTabla=$tabla[0];
+                $modelo=new MTabla($idTabla,$nombreTabla,"");
+                $modelo->asignarTabla($idUser);
             }
-            new MESSAGE_View($respuesta,$volver);
+            
+            if($respuesta=="Inserción realizada con éxito"){
+                $tupla=$modelo->selectNombre();
+                $idTabla=$tupla[0];
+                header("location: ../controller/CTabla.php?action=asignarEj&idTabla=$idTabla");
+            }
+            else new MESSAGE_View($respuesta,"../index.php");
         }
         break;
+        
     case 'asignarEj':
-        if(!isset($_REQUEST['idTabla'])){
-            $modelo=new MTabla("","","");
-            $tablas=$modelo->selectAll();
-            new VAsignarEjercicio($tablas);
-        }
-        elseif(!isset($_REQUEST['ejercicios'])){
-            $idTabla=$_REQUEST['idTabla'];
-            $tabla=new MTabla($idTabla,"","");
-            $tupla=$tabla->selectID();
+        if(!isset($_POST['ejercicios'])){
+            $idTabla=$_GET['idTabla'];
+            
             $modeloEj=new MEjercicio("","","","");
             $ejercicios=$modeloEj->select();
         
-            VAsignarEjercicio::mostrarEjercicios($tupla,$ejercicios);
+            new VAsignarEjercicio($idTabla,$ejercicios);
         }
-        elseif(!isset($_REQUEST['cantidades'])){
-            $idTabla=$_REQUEST['idTabla'];
-            $ejercicios=$_REQUEST['ejercicios'];
-            for($i=0;$i<count($ejercicios);$i++){
-                $modeloEj=new MEjercicio($ejercicios[$i],"","","");
+        elseif(!isset($_POST['tiempo']) && !isset($_POST['repeticion']) && !isset($_POST['serie'])){
+            $idTabla=$_POST['idTabla'];
+            $toret=$_POST['ejercicios'];
+            for($i=0;$i<count($toret);$i++){
+                $modeloEj=new MEjercicio($toret[$i],"","","");
                 $tupla=$modeloEj->selectID();
-                $nombreEj[$i]=$tupla[1];
+                $ejercicios[$i]['id']=$tupla[0];
+                $ejercicios[$i]['name']=$tupla[1];
             }
-            VAsignarEjercicio::pedirCantidades($idTabla,$ejercicios,$nombreEj);
+            new VPedirCantidadesEj($idTabla,$ejercicios);
         }
         else{
-            $idTabla=$_REQUEST['idTabla'];
-            $ejercicios=$_REQUEST['ejercicios'];
-            $cantidades=$_REQUEST['cantidades'];
+            $idTabla=$_POST['idTabla'];
+            $ejercicios=$_POST['ejercicios'];
+            $tiempos=$_POST['tiempo'];
+            $repeticiones=$_POST['repeticion'];
+            $series=$_POST['serie'];
             
             $tabla=new MTabla($idTabla,"","");
             $tabla->deleteAsignacionEj(); //borro los ej asignados previamente
             for($i=0;$i<count($ejercicios);$i++){
-                $tabla->asignarEjercicio($ejercicios[$i],$cantidades[$i]);
+                $tabla->asignarEjercicio($ejercicios[$i],$tiempos[$i],$repeticiones[$i],$series[$i]);
             }
             
-            $modelo=new MTabla($idTabla,"","");
-            $tabla=$modelo->selectID();
-            $tipoTabla=$tabla[2];
-            $volver="../index.php";
-            if($tipoTabla=="Personalizada"){
-                $volver="../controller/CTabla.php?action=asignarUser&idTabla=$idTabla";
-            }
-            
-            new MESSAGE_View("Ejercicios asignados",$volver);
+            new MESSAGE_View("Inserción realizada con éxito","../controller/CTabla.php?action=principal");
         }
         break;
     case 'baja':
-        if(!isset($_REQUEST['idTabla'])){
-            $selectAll=new MTabla("","","");
-            $listaTablas=$selectAll->selectAll();
-            new VBajaTabla($listaTablas);
-        }
-        elseif(!isset($_REQUEST['confirmar'])){
-            $idTabla=$_REQUEST['idTabla'];
+        if(!isset($_POST['confirmar'])){
+            $idTabla=$_GET['idTabla'];
+            
             $modelo=new MTabla($idTabla,"","");
             $tablaBorrar=$modelo->selectID();
-            VBajaTabla::solicitarConfirmacion($tablaBorrar);
+            $ejercicios=$modelo->ejsTabla();
+            
+            if($_SESSION['Id_PerfilUsuario']==2) new VBajaTabla($tablaBorrar,$ejercicios);
         }
         else{
-            if($_REQUEST['confirmar']=="si"){ //si el usuario confirma q quiere borrar la sesion
-                $idTabla=$_REQUEST['idTabla'];
+            if($_POST['confirmar']=="si"){ //si el usuario confirma q quiere borrar la sesion
+                $idTabla=$_POST['idTabla'];
 
-                $sesion=new MTabla($idTabla,"","");
-                $respuesta=$sesion->delete();
-                new MESSAGE_View($respuesta, "../index.php");
+                $modelo=new MTabla($idTabla,"","");
+                $modelo->deleteAsignacionEj();
+                $modelo->deleteAsignacionTabla();
+                $respuesta=$modelo->delete();
+                
+                new MESSAGE_View($respuesta,"../controller/CTabla.php?action=principal");
+            }
+            else{
+                header("location: CTabla.php?action=principal");
             }
         }
         break;
         
     case 'modificacion':
-        if(!isset($_REQUEST['idTabla'])){
-            $selectAll=new MTabla("","","");
-            $listaTablas=$selectAll->selectAll();
-            new VModificarTabla($listaTablas); //asi conseguimos la id 
-        }
-        elseif(!isset($_REQUEST['nombreTabla']) && !isset($_REQUEST['tipoTabla'])){
-            $idTabla=$_REQUEST['idTabla'];
-            VModificarTabla::mostrarFormulario($idTabla); //luego se envia a un formulario para editar
+        if(!isset($_POST['nombreTabla'])){
+            $idTabla=$_GET['idTabla'];
+            new VModificarTabla($idTabla);
         }
         else{
-            $idTabla=$_REQUEST['idTabla'];
-            $nombreTabla=$_REQUEST['nombreTabla'];
-            $tipoTabla=$_REQUEST['tipoTabla'];
+            $idTabla=$_POST['idTabla'];
+            $nombreTabla=$_POST['nombreTabla'];
+            $asignarEj=$_POST['asignarEj'];
 
-            $tabla=new MTabla($idTabla,$nombreTabla,$tipoTabla);
+            $tabla=new MTabla($idTabla,$nombreTabla,"");
             $respuesta=$tabla->update();
-            new MESSAGE_View($respuesta,"../index.php");
+            
+            if($asignarEj=="si"){
+                header("location: CTabla.php?action=asignarEj&idTabla=$idTabla");
+            }
+            else new MESSAGE_View($respuesta,"../controller/CTabla.php?action=principal");
         }
         break;
         
     case 'consulta':
-        //hecho para usuario generico FALTA SESSION
-        $modelo=new MTabla("","","");
-        $tablas=$modelo->selectAll();
-        new VConsultarTabla($tablas);
+        if(!isset($_POST['nombreTabla']) && !isset($_POST['tipoTabla'])){
+            new VConsultarTabla();
+        }
+        else{
+            $nombreTabla=$_POST['nombreTabla'];
+            $tipoTabla=$_POST['tipoTabla'];
+            
+            $modelo=new MTabla("",$nombreTabla,$tipoTabla);
+            $resultado=$modelo->select($_SESSION['Id_usuario']);
+            
+            new VShowAllTabla($resultado,"Resultado de busqueda");
+        }
         break;
         
     case 'verDetalle':
-        $idTabla=$_REQUEST['idTabla'];
+        $idTabla=$_GET['idTabla'];
         $modelo=new MTabla($idTabla,"","");
         $tabla=$modelo->selectID();
         $ejercicios=$modelo->ejsTabla();
-        $usuarios=$modelo->usersTabla();
             
-        new VVerDetalleTabla($tabla,$ejercicios,$usuarios);
+        new VVerDetalleTabla($tabla,$ejercicios);
         break;
         
     case 'asignarUser':
-        if(!isset($_REQUEST['opcion'])){
-            $idTabla=$_REQUEST['idTabla'];
-            $modelo=new MTabla($idTabla,"","");
-            $tabla=$modelo->selectID();
-            new VAsignarUsuario($tabla);
-        }
-        elseif(!isset($_REQUEST['usuarios'])){
-            if($_REQUEST['opcion']=="si"){
-                $idTabla=$_REQUEST['idTabla'];
-                $modelo=new MTabla($idTabla,"","");
+        if(!isset($_POST['usuarios']) || !isset($_POST['idTabla'])){
+            $modelo=new MTabla("","","Predeterminada");
+            $tablas=$modelo->select("");
             
-                $usuarios=$modelo->usuarios();
-                VAsignarUsuario::asignarUsuario($usuarios,$idTabla,"si");
-            }
+            $usuariosPropios=$modelo->usuariosPropios($_SESSION['Id_usuario']);
+            $usuariosNormales=$modelo->usuariosNormales();
+            
+            new VAsignarUsuario($tablas,$usuariosPropios,$usuariosNormales);
         }
         else{
-            $idTabla=$_REQUEST['idTabla'];
-            $usuarios=$_REQUEST['usuarios'];
-            $modelo=new MTabla($idTabla,"","");
+            $idTabla=$_POST['idTabla'];
+            $usuarios=$_POST['usuarios'];
             
+            $modelo=new MTabla($idTabla,"","");
             for($i=0;$i<count($usuarios);$i++){
                 $modelo->asignarTabla($usuarios[$i]);
             }
             
-            new MESSAGE_View("Usuarios añadidos", "../index.php");
+            new MESSAGE_View("Tabla asiganada a usuarios","../controller/CTabla.php?action=principal");
+        }
+        break;
+        
+    case 'principal':
+        $vista=new VPrincipalTabla();
+        if($_SESSION['Id_PerfilUsuario']==2) $vista->vistaEntrenador();
+        elseif($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4){
+            $modelo=new MTabla("","","");
+            $tablas=$modelo->selectUser($_SESSION['Id_usuario']);
+            $user=$_SESSION['Nombre'];
+            new VShowAllTabla($tablas,"Usuario: $user");
+        }
+        else header("location: ../index.php");
+        break;
+        
+    case 'asignarOAlta':
+        if($_SESSION['Id_PerfilUsuario']==2) new VAsigOCrearTabla();
+        else header("location: ../index.php");
+        break;
+        
+    case 'cargarAlta':
+        if($_SESSION['Id_PerfilUsuario']==2) new VCargarAlta();
+        else header("location: ../index.php");
+        break;
+        
+    case 'altaPersonalizada':
+        $modelo=new MTabla("","","");
+        $usersPEF=$modelo->usuariosPropios($_SESSION['Id_usuario']);
+        
+        if($_SESSION['Id_PerfilUsuario']==2) new VCargarAltaPEF($usersPEF);
+        else header("location: ../index.php");
+        break;
+        
+    case 'verTabla':
+        if($_SESSION['Id_PerfilUsuario']==2) new VVerTabla();
+        else header("location: ../index.php");
+        break;
+        
+    case 'showAll':
+        $tipoTabla=$_GET['tipoTabla'];
+        
+        $modelo=new MTabla("","",$tipoTabla);
+        $resultado=$modelo->select($_SESSION['Id_usuario']);
+        
+        new VShowAllTabla($resultado,$tipoTabla);
+        break;
+    
+    case 'cargarVerAsignacion':
+        if($_SESSION['Id_PerfilUsuario']==2) new VCargarVerAsignacion();
+        else header("location: ../index.php");
+        break;
+        
+    case 'verAsignacion':
+        $tipo=$_GET['tipo'];
+        
+        $modelo=new MTabla("","","");
+        if($tipo=="normales"){
+            $asig=$modelo->selectAsignacionesNorm();
+            $texto="Usuarios normales";
+        }
+        elseif($tipo=="pef"){
+            $asig=$modelo->selectAsignacionesPEF($_SESSION['Id_usuario']);
+            $texto="Tus usuarios PEF";
+        }
+        
+        if($_SESSION['Id_PerfilUsuario']==2) new VVerAsignacion($asig,$texto);
+        else header("location: ../index.php");
+        break;
+        
+    case 'desasignarUser':
+        if(!isset($_POST['confirmar'])){
+            $idTabla=$_GET['idTabla'];
+            $idUsuario=$_GET['idUsuario'];
+
+            if($_SESSION['Id_PerfilUsuario']==2) new VDesasignarUser($idTabla,$idUsuario);
+        }
+        else{
+            if($_POST['confirmar']=="si"){
+                $idTabla=$_POST['idTabla'];
+                $idUsuario=$_POST['idUsuario'];
+
+                $modelo=new MTabla($idTabla,"","");
+                $tabla=$modelo->selectID();
+                
+                $respuesta=$modelo->quitarTabla($idUsuario);
+                if($tabla[2]=='Personalizada') $modelo->delete();
+                
+                new MESSAGE_View($respuesta,"../controller/CTabla.php?action=principal");
+            }
+            else{
+                header("location: CTabla.php?action=principal");
+            }
         }
         break;
 }

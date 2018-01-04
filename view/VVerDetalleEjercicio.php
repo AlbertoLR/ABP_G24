@@ -40,7 +40,9 @@ class VVerDetalleEjercicio {
                         <td><?=$ejercicio[2]?></td>
                     </tr>
                 </table>
-                
+<?php
+        if($_SESSION['Id_PerfilUsuario']==2){
+?>
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="../controller/CEjercicio.php?action=principal">
@@ -49,6 +51,7 @@ class VVerDetalleEjercicio {
                     </div>
                 </div>
 <?php
+        }
 	footer();
     }
 }

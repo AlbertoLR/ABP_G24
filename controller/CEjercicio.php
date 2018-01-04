@@ -100,7 +100,8 @@ switch ($_REQUEST['action']){
         break;
     case 'principal':
         $vista=new VPrincipalEjercicio();
-        $vista->vistaEntrenador();
+        if($_SESSION['Id_PerfilUsuario']==2) $vista->vistaEntrenador();
+        else header("location: ../index.php");
         break;
     
     case 'verEjercicio':

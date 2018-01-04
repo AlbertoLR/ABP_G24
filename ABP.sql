@@ -191,8 +191,8 @@ CREATE TABLE `PerfilUsuario` (
 INSERT INTO `PerfilUsuario` (`Id_PerfilUsuario`, `Tipo`) VALUES
 (1, 'Administrador'),
 (2, 'Entrenador'),
-(3, 'Usuario'),
-(4, 'Usuario1');
+(3, 'UsuarioPEF'),
+(4, 'Usuario');
 
 -- --------------------------------------------------------
 
