@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 30-12-2017 a las 18:48:10
+-- Tiempo de generación: 04-01-2018 a las 11:36:48
 -- Versión del servidor: 10.1.26-MariaDB-0+deb9u1
 -- Versión de PHP: 7.0.19-1
 
@@ -191,8 +191,8 @@ CREATE TABLE `PerfilUsuario` (
 INSERT INTO `PerfilUsuario` (`Id_PerfilUsuario`, `Tipo`) VALUES
 (1, 'Administrador'),
 (2, 'Entrenador'),
-(3, 'UsuarioPEF'),
-(4, 'Usuario');
+(3, 'Usuario'),
+(4, 'Usuario1');
 
 -- --------------------------------------------------------
 
@@ -283,7 +283,9 @@ INSERT INTO `Tabla` (`idTabla`, `nombre`, `tipoTabla`) VALUES
 CREATE TABLE `Usuario` (
   `Id_usuario` int(11) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
+  `Apellido` varchar(20) NOT NULL,
   `DNI` varchar(9) NOT NULL,
+  `Telefono` int(9) NOT NULL,
   `Id_PerfilUsuario` int(11) NOT NULL,
   `password` varchar(50) NOT NULL,
   `Id_entrenador` int(11) DEFAULT NULL
@@ -293,11 +295,13 @@ CREATE TABLE `Usuario` (
 -- Volcado de datos para la tabla `Usuario`
 --
 
-INSERT INTO `Usuario` (`Id_usuario`, `Nombre`, `DNI`, `Id_PerfilUsuario`, `password`,`Id_entrenador`) VALUES
-(1, 'Alberto', '44488826H', 1, 'cambiame',NULL),
-(2, 'Samuel', '46573898J', 2, 'cambiame',NULL),
-(3, 'Iago', '12345678K', 3, 'cambiame',2),
-(4, 'Amparo', '87654321J', 4, 'cambiame',2);
+INSERT INTO `Usuario` (`Id_usuario`, `Nombre`, `Apellido`, `DNI`, `Telefono`, `Id_PerfilUsuario`, `password`, `Id_entrenador`) VALUES
+(1, 'Alberto', '', '44488826H', 0, 1, 'cambiame', NULL),
+(2, 'Samuel', '', '46573898J', 0, 2, 'cambiame', NULL),
+(3, 'Iago', '', '12345678K', 0, 3, 'cambiame', 2),
+(4, 'Amparo', '', '87654321J', 0, 4, 'cambiame', 2),
+(5, 'Pedro', '', '35581709V', 0, 4, '', NULL),
+(6, 'Ana', '', '45454545B', 0, 2, '', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -448,7 +452,7 @@ ALTER TABLE `Tabla`
 -- AUTO_INCREMENT de la tabla `Usuario`
 --
 ALTER TABLE `Usuario`
-  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Restricciones para tablas volcadas
 --
