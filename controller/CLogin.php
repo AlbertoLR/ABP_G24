@@ -20,11 +20,13 @@ if(!isset($_REQUEST['dni'])){
     
     $user=new MLogin($dni);
     if($tuplaUser=$user->selectDNI()){
-        if($password==$tuplaUser[4]){
+        if($password==$tuplaUser[6]){
             $_SESSION['Id_usuario']=$tuplaUser[0];
             $_SESSION['Nombre']=$tuplaUser[1];
+            
             $_SESSION['DNI']=$dni;
-            $_SESSION['Id_PerfilUsuario']=$tuplaUser[3];
+          
+            $_SESSION['Id_PerfilUsuario']=$tuplaUser[5];
             
             new MESSAGE_View("Bienvenido $tuplaUser[1]","../index.php");
         }
