@@ -2266,7 +2266,10 @@ pre code {
   }
 }
 table {
-  background-color: transparent;
+  background-color: #0af;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
 }
 caption {
   padding-top: 8px;
