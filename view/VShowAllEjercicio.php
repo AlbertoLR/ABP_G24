@@ -42,9 +42,7 @@ class VShowAllEjercicio {
             do{
 ?>
                         <tr>
-                            <td>
-                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>"><?=$tupla[1]?></a>
-                            </td>
+                            <td><?=$tupla[1]?></td>
                             <td><?= $tupla[3]?></td>
                             <td>
                                 <a href="../controller/CEjercicio.php?action=modificacion&idEjercicio=<?=$tupla[0]?>" aria-label="Edit">
@@ -52,6 +50,9 @@ class VShowAllEjercicio {
                                 </a>
                                 <a href=../controller/CEjercicio.php?action=baja&idEjercicio=<?= $tupla[0]?> aria-label="Delete">
                                     <img src="../images/delete.png" width="2%" alt="delete"/>
+                                </a>
+                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>">
+                                    <img src="../images/eye.png" width="2%" alt="showCurrent"/>
                                 </a>
                             </td>
                         </tr>

@@ -49,6 +49,7 @@ class VVerDetalleTabla {
                             <th>Tiempo</th>
                             <th>Repeticiones</th>
                             <th>Series</th>
+                            <th>Acciones</th>
 			</tr>
                     </thead>
                     <tbody>
@@ -58,13 +59,16 @@ class VVerDetalleTabla {
             do{
 ?>
                         <tr>
-                            <td>
-                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>"><?=$tupla[1]?></a>
-                            </td>
+                            <td><?=$tupla[1]?></td>
                             <td><?= $tupla[2]?></td>
                             <td><?= $tupla[3]?></td>
                             <td><?= $tupla[4]?></td>
                             <td><?= $tupla[5]?></td>
+                            <td>
+                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>">
+                                    <img src="../images/eye.png" width="2%" alt="showCurrent"/>
+                                </a>
+                            </td>
                         </tr>
 <?php 
                 $tupla=$ejercicios->fetch_row();

@@ -48,24 +48,26 @@ class VShowAllTabla {
             do{
 ?>
                         <tr>
-                            <td>
-                                <a href="../controller/CTabla.php?action=verDetalle&idTabla=<?=$tupla[0]?>"><?=$tupla[1]?></a>
-                            </td>
+                            <td><?=$tupla[1]?></td>
                             <td><?= $tupla[2]?></td>
+                            <td>
 <?php
                 if($_SESSION['Id_PerfilUsuario']==2){
 ?>
-                            <td>
+
                                 <a href="../controller/CTabla.php?action=modificacion&idTabla=<?=$tupla[0]?>" aria-label="Edit">
                                     <img src="../images/edit.png" width="2%" alt="edit"/>
                                 </a>
                                 <a href=../controller/CTabla.php?action=baja&idTabla=<?= $tupla[0]?> aria-label="Delete">
                                     <img src="../images/delete.png" width="2%" alt="delete"/>
                                 </a>
-                            </td>
 <?php
                 }
 ?>
+                                <a href="../controller/CTabla.php?action=verDetalle&idTabla=<?=$tupla[0]?>">
+                                    <img src="../images/eye.png" width="2%" alt="showCurrent"/>
+                                </a>
+                            </td>
                         </tr>
 <?php 
                 $tupla=$tablas->fetch_row();
