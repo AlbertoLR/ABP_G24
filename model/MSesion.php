@@ -11,17 +11,17 @@ class MSesion {
     var $idTabla;
     var $nombreSesion;
     var $horaInicio;
-    var $horaFin;
+    var $duracion;
     var $comentario;
     var $mysqli; //atributo manejador de la BD
     
-    function __construct($idSesion,$idUser,$idTabla,$nombreSesion,$horaInicio,$horaFin,$comentario) {
+    function __construct($idSesion,$idUser,$idTabla,$nombreSesion,$horaInicio,$duracion,$comentario) {
         $this->idSesion=$idSesion;
         $this->idUser=$idUser;
         $this->idTabla=$idTabla;
         $this->nombreSesion=$nombreSesion;
         $this->horaInicio=$horaInicio;
-        $this->horaFin=$horaFin;
+        $this->duracion=$duracion;
         $this->comentario=$comentario;
         
         include_once "../core/ConexionBD.php";
@@ -30,7 +30,7 @@ class MSesion {
     
     function insert(){
         if($this->idTabla<>"" && $this->nombreSesion<>""){
-            $sql = "INSERT INTO Sesion (idUsuario,idTabla,nombreSesion,horaInicio,horaFin,comentario) VALUES ('$this->idUser','$this->idTabla','$this->nombreSesion','$this->horaInicio','$this->horaFin','$this->comentario')";
+            $sql = "INSERT INTO Sesion (idUsuario,idTabla,nombreSesion,horaInicio,duracion,comentario) VALUES ('$this->idUser','$this->idTabla','$this->nombreSesion','$this->horaInicio','$this->duracion','$this->comentario')";
             $this->mysqli->query($sql);
             return "Inserción realizada con éxito";
         }
@@ -69,25 +69,13 @@ class MSesion {
             else{
                 $nombreSesion=$this->nombreSesion;
             }
-            if($this->horaInicio==""){
-                $horaInicio=$tupla[4];
-            }
-            else{
-                $horaInicio=$this->horaInicio;
-            }
-            if($this->horaFin==""){
-                $horaFin=$tupla[5];
-            }
-            else{
-                $horaFin=$this->horaFin;
-            }
             if($this->comentario==""){
                 $comentario=$tupla[6];
             }
             else{
                 $comentario=$this->comentario;
             }
-            $sql = "UPDATE Sesion SET idTabla='$idTabla',nombreSesion='$nombreSesion',horaInicio='$horaInicio',horaFin='$horaFin',comentario='$comentario' WHERE idSesion=$this->idSesion";
+            $sql = "UPDATE Sesion SET idTabla='$idTabla',nombreSesion='$nombreSesion',comentario='$comentario' WHERE idSesion=$this->idSesion";
             $this->mysqli->query($sql);
             return "Modificado correctamente";
         }
@@ -96,20 +84,10 @@ class MSesion {
         }
     }
     
-    function select(){
-        $soloEste=TRUE;
-        $sql="SELECT Sesion.idSesion,Tabla.nombre,Sesion.nombreSesion,Sesion.horaInicio,Sesion.horaFin,Sesion.comentario FROM Sesion,Tabla WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario='$this->idUser' AND ";
-        if($this->idTabla<>""){
-            $sql.="Sesion.idTabla='$this->idTabla'";
-            $soloEste=FALSE;
-        }
-        if($this->nombreSesion<>""){
-            if(!$soloEste){
-                $sql.=" AND ";
-            }
-            $sql.="Sesion.nombreSesion LIKE '%$this->nombreSesion%'";
-            $soloEste=FALSE;
-        }
+    function selectUser(){
+        $sql="SELECT Sesion.idSesion,Sesion.nombreSesion,Tabla.idTabla,Tabla.nombre,Sesion.horaInicio FROM Sesion,Tabla WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario='$this->idUser'";
+        if($this->idTabla<>"") $sql.=" AND Sesion.idTabla='$this->idTabla'";
+        if($this->nombreSesion<>"") $sql.=" AND Sesion.nombreSesion LIKE '%$this->nombreSesion%'";
         if(($resultado=$this->mysqli->query($sql))){
             return $resultado;
         }
@@ -118,8 +96,38 @@ class MSesion {
         }
     }
     
-    function selectAll(){
-        $sql="SELECT * FROM Sesion";
+    function selectTipo($idPerfil,$idEntrenador){
+        if($idPerfil==3) $sql="SELECT Sesion.idSesion,Sesion.nombreSesion,Tabla.idTabla,Tabla.nombre,Sesion.horaInicio,Usuario.DNI,Usuario.Nombre,Usuario.Apellido FROM Sesion,Tabla,Usuario WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario=Usuario.Id_usuario AND Usuario.Id_entrenador='$idEntrenador'";
+        elseif($idPerfil==4) $sql="SELECT Sesion.idSesion,Sesion.nombreSesion,Tabla.idTabla,Tabla.nombre,Sesion.horaInicio,Usuario.DNI,Usuario.Nombre,Usuario.Apellido FROM Sesion,Tabla,Usuario WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario=Usuario.Id_usuario AND Usuario.Id_PerfilUsuario=$idPerfil";
+        if(($resultado=$this->mysqli->query($sql))){
+            return $resultado;
+        }
+        else{
+            return "La busqueda no ha devuelto resultado";
+        }
+    }
+    
+    function selectEntrenador($nombreTabla,$DNI,$idEntrenador){
+        //sql1 users PEF propios | sql2 users normales
+        $sql1="SELECT Sesion.idSesion,Sesion.nombreSesion,Tabla.idTabla,Tabla.nombre,Sesion.horaInicio,Usuario.DNI,Usuario.Nombre,Usuario.Apellido FROM Sesion,Tabla,Usuario WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario=Usuario.Id_usuario AND Usuario.Id_entrenador='$idEntrenador' AND Usuario.Id_PerfilUsuario=3";
+        $sql2="SELECT Sesion.idSesion,Sesion.nombreSesion,Tabla.idTabla,Tabla.nombre,Sesion.horaInicio,Usuario.DNI,Usuario.Nombre,Usuario.Apellido FROM Sesion,Tabla,Usuario WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idUsuario=Usuario.Id_usuario AND Usuario.Id_PerfilUsuario=4";
+        if($nombreTabla<>""){
+            $sql1.=" AND Tabla.nombre LIKE '%$nombreTabla%'";
+            $sql2.=" AND Tabla.nombre LIKE '%$nombreTabla%'";
+        }
+        if($DNI<>""){
+            $sql1.=" AND Usuario.DNI LIKE '%$DNI%'";
+            $sql2.=" AND Usuario.DNI LIKE '%$DNI%'";
+        }
+        if($this->nombreSesion<>""){
+            $sql1.=" AND Sesion.nombreSesion LIKE '%$this->nombreSesion%'";
+            $sql2.=" AND Sesion.nombreSesion LIKE '%$this->nombreSesion%'";
+        }
+        if($this->horaInicio<>""){
+            $sql1.=" AND Sesion.horaInicio LIKE '%$this->horaInicio%'";
+            $sql2.=" AND Sesion.horaInicio LIKE '%$this->horaInicio%'";
+        }
+        $sql=$sql1." UNION ".$sql2;
         if(($resultado=$this->mysqli->query($sql))){
             return $resultado;
         }
@@ -129,7 +137,7 @@ class MSesion {
     }
     
     function selectID(){
-        $sql="SELECT Sesion.idSesion,Tabla.nombre,Sesion.nombreSesion,Sesion.horaInicio,Sesion.horaFin,Sesion.comentario FROM Sesion,Tabla WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idSesion='$this->idSesion'";
+        $sql="SELECT Sesion.idSesion,Sesion.nombreSesion,Tabla.idTabla,Tabla.nombre,Sesion.horaInicio,Sesion.duracion,Sesion.comentario FROM Sesion,Tabla WHERE Sesion.idTabla=Tabla.idTabla AND Sesion.idSesion='$this->idSesion'";
         if(($resultado=$this->mysqli->query($sql))){
             $tupla=$resultado->fetch_row();
             return $tupla;
@@ -149,6 +157,17 @@ class MSesion {
         }
     }
     
+    function detalleTabla(){
+        $sql="SELECT Tabla.idTabla,Tabla.nombre,Ejercicio.idEjercicio,Ejercicio.nombreEj,Ejercicio.tipoEj,EjercicioTabla.tiempo,EjercicioTabla.repeticion,EjercicioTabla.serie FROM Tabla,Ejercicio,EjercicioTabla WHERE Ejercicio.idEjercicio=EjercicioTabla.idEjercicio AND Tabla.idTabla=EjercicioTabla.idTabla AND Tabla.idTabla='$this->idTabla'";
+        if($resultado= $this->mysqli->query($sql)){
+            return $resultado;
+        }
+        else{
+            return "No se econtro la tabla";
+        }
+    }
+
+
     public function __destruct(){
         desconexionBD($this->mysqli);
     }

@@ -249,6 +249,13 @@ class MTabla {
         }
     }
     
+    //cuenta el numero de tablas asignadas q tiene un user
+    function numTablasUser($idUser){
+        $sql="SELECT idTabla FROM AsignacionTabla WHERE idUsuario='$idUser'";
+        $toret=$this->mysqli->query($sql);
+        return $toret->num_rows;
+    }
+    
     public function __destruct(){
         desconexionBD($this->mysqli);
     }

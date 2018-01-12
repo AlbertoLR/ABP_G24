@@ -59,13 +59,11 @@ class VBajaTabla {
             do{
 ?>
                         <tr>
-                            <td>
-                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>"><?=$tupla[1]?></a>
-                            </td>
-                            <td><?= $tupla[2]?></td>
-                            <td><?= $tupla[3]?></td>
-                            <td><?= $tupla[4]?></td>
-                            <td><?= $tupla[5]?></td>
+                            <td><?=$tupla[1]?></td>
+                            <td><?=$tupla[2]?></td>
+                            <td><?=$tupla[3]?></td>
+                            <td><?=$tupla[4]?></td>
+                            <td><?=$tupla[5]?></td>
                         </tr>
 <?php 
                 $tupla=$ejercicios->fetch_row();
@@ -78,8 +76,10 @@ class VBajaTabla {
                 
                 <form action="../controller/CTabla.php?action=baja" method="post">
                     <input type='hidden' name='idTabla' value='<?=$tablaBorrar[0]?>'/>
-                    <button type="submit" name="confirmar" value="si"><img src="../images/confirm.png" width="4%" alt="confirm"/></button>
-                    <button type="submit" name="confirmar" value="no"><img src="../images/cancel.png" width="4%" alt="cancel"/></button>
+                    <center>
+                        <button type="submit" name="confirmar" value="si"><img src="../images/confirm.png" width="4%" alt="confirm"/></button>
+                        <button type="submit" name="confirmar" value="no"><img src="../images/cancel.png" width="4%" alt="cancel"/></button>
+                    </center>
                 </form>
 <?php
 	footer();

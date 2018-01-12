@@ -12,6 +12,10 @@ class VVerDetalleTabla {
     function render($tabla,$ejercicios){
         menus();
 ?>
+        <style type="text/css">
+            h2 {color:white;}
+        </style>
+        
 	<div id="page-wrapper">
 		
             <div class="container-fluid">
@@ -38,7 +42,7 @@ class VVerDetalleTabla {
                 </table>
                 
                 <div class="col-lg-12">
-                    <h2 class="panel-title">Ejercicios de la tabla</h2>
+                    <h2>Ejercicios de la tabla</h2>
                 </div>
                 
                 <table class="table">
@@ -65,16 +69,15 @@ class VVerDetalleTabla {
                             <td><?= $tupla[4]?></td>
                             <td><?= $tupla[5]?></td>
                             <td>
-                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>">
+                                <a href="../controller/CEjercicio.php?action=verDetalle&idEjercicio=<?=$tupla[0]?>" target="_blank">
                                     <img src="../images/eye.png" width="2%" alt="showCurrent"/>
                                 </a>
                             </td>
                         </tr>
 <?php 
                 $tupla=$ejercicios->fetch_row();
+            }while(!is_null($tupla));
         }
-        while(!is_null($tupla));
-    }
 ?>
                     </tbody>
                </table>

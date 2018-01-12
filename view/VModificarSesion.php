@@ -6,83 +6,68 @@
  */
 
 class VModificarSesion {
-    function __construct($listaSesiones){
-        $this->render($listaSesiones);
+    function __construct($idSesion,$tablas){
+        $this->render($idSesion,$tablas);
     }
     
-    function render($listaSesiones){
+    function render($idSesion,$tablas){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Seleccione la sesion a modificar:</h2>
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Editar sesion <small>Introduzca datos</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+        
                 <form action="../controller/CSesion.php" method="post">
-                    <div>
-                        <p>Selecione la ID de la sesion a modificar:</p>
+                    <input type='hidden' name='idSesion' value='<?=$idSesion?>'/>
+                    <div class="apartado">
+                        <label for="nombreSesion">Nombre:</label>
+                        <input type="text" name="nombreSesion" size="45"/>
+                    </div>
+                    <div class="apartado">
+			<label for="idTabla">Tabla:</label><br>
 <?php
-        $tupla=$listaSesiones->fetch_row();
-        do{
-            echo "<input type='radio' name='idSesion' value='$tupla[0]'> $tupla[3]<br>";
-            $tupla=$listaSesiones->fetch_row();
-        }while(!is_null($tupla));
+        $tupla=$tablas->fetch_row();
+        if($tupla!=null){
+            do{
+?>
+                        <input type='radio' name='idTabla' value='<?=$tupla[0]?>'><b> <?=$tupla[1]?> </b><br>
+<?php
+                $tupla=$tablas->fetch_row();
+            }
+            while(!is_null($tupla));
+        }
 ?>
                     </div>
-                    <div>
-                        <button type="submit" name="action" value="modificacion">Enviar</button>
+                    <div class="apartado">
+                        <label for="comentario">Comentario:</label>
+                        <input type="text" name="comentario" size="45"/>
+                    </div>
+                    <div class="apartado">
+                        <button type="submit" name="action" value="modificacion"><b>Enviar</b></button>
+                        <button type="reset" name="reset" value="Borrar"><b>Borrar</b></button>
                     </div>
                 </form>
-            </body>
-        </html>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CSesion.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
+           
 <?php
-    }
-    
-    static function mostrarFormulario($idSesion,$tablasUser){
-?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de modificar sesion:</h2>
-                <form action="../controller/CSesion.php" method="post">
-                    <div>
-                        <label for="nombreSesion">Nombre de la sesion:</label>
-                        <input type="text" name="nombreSesion" size="50"/>
-                    </div>
-                    <div>
-                        <p>Selecione la tabla sobre la que se realizo la sesion:</p>
-<?php
-        $tupla=$tablasUser->fetch_row();
-        do{
-            echo "<input type='radio' name='idTabla' value='$tupla[0]'> $tupla[1]<br>";
-            $tupla=$tablasUser->fetch_row();
-        }while(!is_null($tupla));
-        echo "<input type='hidden' name='idSesion' value='$idSesion'/>";
-?>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="fecha">Fecha:</label>
-                        <input type="date" name="fecha"/>
-                    </div>
-                    <div>
-                        <label for="horaInicio">Hora de inicio:</label>
-                        <input type="time" name="horaInicio"/>
-                    </div>
-                    <div>
-                        <label for="horaFin">Hora de finalizacion:</label>
-                        <input type="time" name="horaFin"/>
-                    </div>
-                    <div>
-                        <label for="comentario">Comentario:</label><br>
-                        <textarea name="comentario">Escribir comentario aqui</textarea>
-                    </div>
-                    <div>
-                        <button type="submit" name="action" value="modificacion">Enviar</button>
-                        <button type="reset" name="reset" value="Borrar">Borrar</button>
-                    </div>
-                </form>
-            </body>
-	</html>
-<?php
+	footer();
     }
 }
 ?>

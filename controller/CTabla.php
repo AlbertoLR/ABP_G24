@@ -35,8 +35,13 @@ estaRegistrado();
 switch ($_REQUEST['action']){
     case 'alta':
         if(!isset($_REQUEST['nombreTabla']) || !isset($_REQUEST['tipoTabla'])){
-            if(isset($_POST['Id_usuario'])) $idUser=$_POST['Id_usuario'];
-            else $idUser=NULL;
+            $idUser=NULL;
+            if(isset($_POST['Id_usuario'])){
+                $idUser=$_POST['Id_usuario'];
+                $modelo=new MTabla("","","");
+                if($modelo->numTablasUser($idUser)>=3) header("location: ../controller/CTabla.php?action=excesoTablas");
+            }
+            
             new VAltaTabla($idUser);
         }
         else{
@@ -152,7 +157,8 @@ switch ($_REQUEST['action']){
         }
         else{
             $nombreTabla=$_POST['nombreTabla'];
-            $tipoTabla=$_POST['tipoTabla'];
+            $tipoTabla="";
+            if(isset($_POST['tipoTabla'])) $tipoTabla=$_POST['tipoTabla'];
             
             $modelo=new MTabla("",$nombreTabla,$tipoTabla);
             $resultado=$modelo->select($_SESSION['Id_usuario']);
@@ -186,7 +192,7 @@ switch ($_REQUEST['action']){
             
             $modelo=new MTabla($idTabla,"","");
             for($i=0;$i<count($usuarios);$i++){
-                $modelo->asignarTabla($usuarios[$i]);
+                if($modelo->numTablasUser($usuarios[$i])<3) $modelo->asignarTabla($usuarios[$i]);
             }
             
             new MESSAGE_View("Tabla asiganada a usuarios","../controller/CTabla.php?action=principal");
@@ -283,5 +289,9 @@ switch ($_REQUEST['action']){
                 header("location: CTabla.php?action=principal");
             }
         }
+        break;
+        
+    case 'excesoTablas':
+        new MESSAGE_View("Este usuario ya ha alcanzado el numero maximo de tablas asignadas","../controller/CTabla.php?action=principal");
         break;
 }

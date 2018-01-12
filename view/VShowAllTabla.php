@@ -32,13 +32,7 @@ class VShowAllTabla {
 			<tr>
                             <th>Nombre</th>
                             <th>Tipo</th>
-<?php
-        if($_SESSION['Id_PerfilUsuario']==2){
-?>
                             <th>Acciones</th>
-<?php
-        }
-?>
 			</tr>
                     </thead>
                     <tbody>

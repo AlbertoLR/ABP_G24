@@ -44,15 +44,16 @@ class VVerAsignacion {
             do{
 ?>
                         <tr>
-                            <td>
-                                <a href="../controller/CTabla.php?action=verDetalle&idTabla=<?=$tupla[0]?>"><?=$tupla[1]?></a>
-                            </td>
-                            <td><?= $tupla[2]?></td>
-                            <td><?= $tupla[3]?></td>
-                            <td><?= $tupla[4]?></td>
+                            <td><?=$tupla[1]?></td>
+                            <td><?=$tupla[2]?></td>
+                            <td><?=$tupla[3]?></td>
+                            <td><?=$tupla[4]?></td>
                             <td>
                                 <a href=../controller/CTabla.php?action=desasignarUser&idTabla=<?= $tupla[0]?>&idUsuario=<?= $tupla[5]?> aria-label="Delete">
                                     <img src="../images/delete.png" width="2%" alt="delete"/>
+                                </a>
+                                <a href="../controller/CTabla.php?action=verDetalle&idTabla=<?=$tupla[0]?>" aria-label="showCurrent" target="_blank">
+                                    <img src="../images/eye.png" width="2%" alt="Ver detalle"/>
                                 </a>
                             </td>
                         </tr>

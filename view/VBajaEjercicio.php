@@ -44,8 +44,10 @@ class VBajaEjercicio{
                 
                 <form action="../controller/CEjercicio.php?action=baja" method="post">
                     <input type='hidden' name='idEjercicio' value='<?=$ejercicioBorrar[0]?>'/>
-                    <button type="submit" name="confirmar" value="si"><img src="../images/confirm.png" width="4%" alt="confirm"/></button>
-                    <button type="submit" name="confirmar" value="no"><img src="../images/cancel.png" width="4%" alt="cancel"/></button>
+                    <center>
+                        <button type="submit" name="confirmar" value="si"><img src="../images/confirm.png" width="4%" alt="confirm"/></button>
+                        <button type="submit" name="confirmar" value="no"><img src="../images/cancel.png" width="4%" alt="cancel"/></button>
+                    </center>
                 </form>
 <?php
 	footer();

@@ -11,19 +11,34 @@ class MESSAGE_View {
     }
     
     function render($mensaje,$volver){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-<?php
-        echo "MENSAJE: $mensaje";
-        echo "<br><br>";
-        echo "<a href='$volver'>Volver</a>";
+	<div id="page-wrapper">
+		
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Aviso
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
         
-?>
-            </body>
-        </html>
+                <table class="table"><tr><td><br><br><br><center><?=$mensaje?></center><br><br><br></td></tr></table>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href='<?=$volver?>'>
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
+           
 <?php
+	footer();
     }
 }
 ?>
