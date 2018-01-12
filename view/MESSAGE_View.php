@@ -5,7 +5,10 @@
  * @author iago
  */
 
-class MESSAGE_View {
+include_once "../layout/menus.php";
+include_once "../layout/footer.php";
+ 
+ class MESSAGE_View {
     function __construct($mensaje,$volver){
         $this->render($mensaje,$volver);
     }
