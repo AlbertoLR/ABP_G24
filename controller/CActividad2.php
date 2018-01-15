@@ -79,19 +79,19 @@ estaRegistrado();
                 $listaActividad=$selectAll->select();
                 new VModificarActividad2($listaActividad); //asi conseguimos la id del Actividad a modificar 
             }
-            elseif (!isset($_REQUEST['Nombre']) && !isset($_REQUEST['Sala'])) {
+            elseif (!isset($_REQUEST['Nombre']) && !isset($_REQUEST['Capacidad'])) {
                 $Id_Actividad=$_REQUEST['Id_Actividad'];
                 VModificarActividad2::mostrarFormulario($Id_Actividad); //luego se envia a un formulario para editar
             }
             else{
                 $Id_Actividad=$_REQUEST['Id_Actividad'];
                 $Nombre=$_REQUEST['Nombre'];
-                $Sala=$_REQUEST['Sala'];
+                $Id_Recurso=$_REQUEST['Id_Recurso'];
                 $Capacidad=$_REQUEST['Capacidad'];
                 $HoraInicio=$_REQUEST['HoraInicio'];
                 $HoraFin=$_REQUEST['HoraFin'];
                 $Dia=$_REQUEST['Dia'];
-                $Actividad=new MActividad2($Id_Actividad,$Nombre,$Sala,$Capacidad,$HoraInicio,$HoraFin,$Dia);
+                $Actividad=new MActividad2($Id_Actividad,$Nombre,$Id_Recurso,$Capacidad,$HoraInicio,$HoraFin,$Dia);
                 $respuesta=$Actividad->update();
                 new MESSAGE_View($respuesta,"../index.php");
             }
