@@ -360,8 +360,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 insert into `PerfilUsuario` (`Id_PerfilUsuario`, `Tipo`) values
 (1, 'Administrador'),
 (2, 'Entrenador'),
-(3, 'UsuarioTDU'),
-(4, 'UsuarioPEF');
+(3, 'UsuarioPEF'),
+(4, 'UsuarioTDU');
 
 
 --
