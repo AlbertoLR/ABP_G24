@@ -10,7 +10,8 @@ if (isset($_POST["submit"])){
     $mysqlPasswd = $_POST["passwd"];
     $dbFile = "ABP.sql";
     $command='mysql -u' .$mysqlUserName .' -p' .$mysqlPasswd . ' < ' .$dbFile;
-    exec($command,$output=array(),$worked);
+	$output=array();
+    exec($command,$output,$worked);
     switch($worked){
 	case 0:
             echo 'El archivo <b>' .$dbFile .'</b> ha sido importado a la base de datos correctamente<br />';
