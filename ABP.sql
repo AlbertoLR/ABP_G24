@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `Sesion` (
   `idTabla` INT NOT NULL,
   `nombreSesion` VARCHAR(45) NOT NULL,
   `horaInicio` DATETIME NOT NULL,
-  `horaFin` DATETIME NOT NULL,
+  `duracion` TIME NOT NULL,
   `comentario` VARCHAR(140) NULL,
   PRIMARY KEY (`idSesion`),
   CONSTRAINT `fk_Sesion_AsignacionTabla1`
@@ -621,8 +621,8 @@ INSERT INTO `Notificacion` (`idNotificacion`, `idUsuario`, `titulo`, `txtNotific
 -- dumping data for table `Sesion`
 --
 
-insert into `Sesion` (`idSesion`, `idUsuario`, `idTabla`, `nombreSesion`, `horaInicio`, `horaFin`, `comentario`) values
-(1, '3', '1',  'abdominal tabla 1', '2015-12-01 16:00:00', '2015-12-01 16:20:00', 'como cansa esto'),
-(2, '3', '1', 'sentadillas tabla 1', '2015-12-01 18:00:00', '2015-12-01 18:15:00', 'me duelen las piernas'),
-(3, '4', '2', 'flexiones tabla 2', '2016-10-01 17:00:00', '2016-10-01 17:20:00', ' ay mi tripita'),
-(4, '4', '2', 'marcha tabla 2', '2016-11-01 16:00:00', '2016-11-01 18:00:00', 'no aguanto mas');
+INSERT INTO `Sesion` (`idSesion`, `idUsuario`, `idTabla`, `nombreSesion`, `horaInicio`, `duracion`, `comentario`) VALUES
+(1, 3, 1, 'abdominal tabla 1', '2015-12-01 16:00:00', '4:20:00', 'como cansa esto'),
+(2, 3, 1, 'sentadillas tabla 1', '2015-12-01 18:00:00', '3:15:00', 'me duelen las piernas'),
+(3, 4, 2, 'flexiones tabla 2', '2016-10-01 17:00:00', '2:20:00', ' ay mi tripita'),
+(4, 4, 2, 'marcha tabla 2', '2016-11-01 16:00:00', '1:00:00', 'no aguanto mas');
