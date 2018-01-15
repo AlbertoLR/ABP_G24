@@ -12,7 +12,7 @@ class VAltaActividad2{
     }
     
     function render(){
-      
+      menus();
 ?>
       
        <div id="page-wrapper">
@@ -72,7 +72,7 @@ class VAltaActividad2{
                 </form>
            
 <?php
-
+footer();
     }
 }
 ?>

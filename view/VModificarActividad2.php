@@ -28,6 +28,7 @@ class VModificarActividad2{
                         </h1>
                     </div>
                 </div>
+               <form action="../controller/CActividad2.php" method="post">
 <?php
         $tupla=$listaActividad->fetch_row();
         do{
@@ -36,6 +37,7 @@ class VModificarActividad2{
         }while(!is_null($tupla));
 ?>
                         </select>
+
                     </div>
                     <div>
                         <button type="submit" name="action" value="modificacion">Enviar</button>
@@ -70,10 +72,6 @@ class VModificarActividad2{
                     <div>
                         <label for="Nombre">Nombre del Actividad:</label>
                         <input type="text" name="Nombre" size="30"/>
-                    </div>
-                    <div>
-                        <label for="Sala">Sala:</label><br>
-                       <input type="text" name="Sala" size="9"/>
                     </div>
                      <div>
                         <label for="Capacidad">Capacidad:</label>
