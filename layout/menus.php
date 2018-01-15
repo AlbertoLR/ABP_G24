@@ -70,7 +70,7 @@ function menus(){
                     <li class="active">
                         <a href="../index.php"><i class="inicio"></i>Inicio</a>
                     </li>';
-
+if (isset($_SESSION['Id_PerfilUsuario'])){
     if($_SESSION['Id_PerfilUsuario']==1){
 			echo	'<li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#usuario"><i class="user"></i> Usuarios <i class="fa fa-fw fa-caret-down"></i></a>
@@ -124,7 +124,7 @@ function menus(){
                         </ul>
                     </li>';
 	}					
-       
+}   
 	   
 	   echo      '</ul>
             </div>
