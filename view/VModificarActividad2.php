@@ -4,21 +4,30 @@
  *
  * @author Samu
  */
-
+include_once "../layout/menus.php";
+include_once "../layout/footer.php";
+ 
 class VModificarActividad2{
     function __construct($listaActividad) {
         $this->render($listaActividad);
     }
     
     function render($listaActividad){
+
+    menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Seleccione el Actividad a modificar:</h2>
-                <form action="../controller/CActividad2.php" method="post">
-                    <div>
-                        <p>Selecione la ID del Actividad a modificar:</p>
+        <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           Modificar Actividad <small>Introduzca los datos</small>
+                        </h1>
+                    </div>
+                </div>
 <?php
         $tupla=$listaActividad->fetch_row();
         do{
@@ -32,20 +41,30 @@ class VModificarActividad2{
                         <button type="submit" name="action" value="modificacion">Enviar</button>
                     </div>
                 </form>
-            </body>
-        </html>
-
+           
 <?php
+ footer();
     }
     
     static function mostrarFormulario($Id_Actividad){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de modificacion del Actividad:</h2>
+        
+               <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Modificar Actividad <small>Introduzca las modificaciones</small>
+                        </h1>
+                    </div>
+                </div>
                 <form action="../controller/CActividad2.php" method="post">
 <?php
+
         echo "<input type='hidden' name='Id_Actividad' value='$Id_Actividad'/>";
 ?>
                     <div>
@@ -87,9 +106,9 @@ class VModificarActividad2{
                         <button type="reset" name="reset" value="Borrar">Borrar</button>
                     </div>
                 </form>
-            </body>
-	</html>
+            <
 <?php
+footer();
     }
 }
 ?>

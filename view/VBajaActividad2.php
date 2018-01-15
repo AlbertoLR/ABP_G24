@@ -4,6 +4,8 @@
  *
  * @author Samu
  */
+include "../layout/menus.php";
+include "../layout/footer.php";
 
 class VBajaActividad2{
     function __construct($listaActividad) {
@@ -11,10 +13,21 @@ class VBajaActividad2{
     }
       function render($listaActividad){
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Seleccione la actividad a borrar:</h2>
+<?php
+    menus();
+?>
+        <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           Borrar Actividad <small>Seleccione la actividad a borrar</small>
+                        </h1>
+                    </div>
+                </div>
                 <form action="../controller/CActividad2.php" method="post">
                     <div>
                         <p>Selecione la ID del Actividad a borrar:</p>
@@ -34,18 +47,27 @@ class VBajaActividad2{
         </html>
 
 <?php
+footer();
     }
     
     static function solicitarConfirmacion($ActividadBorrar){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>¿Desea borrar este Actividad?</h2>
-                <table>
+       
+                  <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+              Borrar Actividad <small>¿Desea borrar esta actividad?</small>
+                        </h1>
+                <table class="table">
                     <tr>
                         <td>Id del Actividad:</td>
-<?php
+<?php                                                      
         echo "<td>$ActividadBorrar[0]</td>";
 ?>
                     </tr>
@@ -79,14 +101,16 @@ class VBajaActividad2{
       
         echo "<input type='hidden' name='action' value='baja'/>";
 ?>
-                    <div>
+                    <div><center>
                         <button type="submit" name="confirmar" value="si">Si</button>
                         <button type="submit" name="confirmar" value="no">No</button>
+                    </center>
                     </div>
                 </form>
             </body>
         </html>
 <?php
+footer();
     }
 }
 ?>

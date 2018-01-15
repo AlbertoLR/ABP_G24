@@ -5,17 +5,28 @@
  * @author Samu
  */
 
+
 class VAltaActividad2{
     function __construct() {
         $this->render();
     }
     
     function render(){
+      
 ?>
-        <html>
-            <head></head>
-            <body>
-                <h2>Formulario de alta de Actividad:</h2>
+      
+       <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+              Nueva Actividad <small>Introduzca los datos de actividad</small>
+                        </h1>
+                    </div>
+                </div>
                 <form action="../controller/CActividad2.php" method="post">
                     <div>
                         <label for="nombreAc">Nombre del Usuario:</label>
@@ -59,9 +70,9 @@ class VAltaActividad2{
                         <button type="reset" name="reset" value="Borrar">Borrar</button>
                     </div>
                 </form>
-            </body>
-	</html>
+           
 <?php
+
     }
 }
 ?>
