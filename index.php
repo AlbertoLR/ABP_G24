@@ -90,7 +90,130 @@ estaRegistrado();
                     </div>
 <?php
         }
+        
+        if ($_SESSION['Id_PerfilUsuario']==2){
 ?>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <a href="controller/CEjercicio.php?action=principal">
+							<div class="panel panel-primary">
+                            <div class="panel-heading">
+                               <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/ejercicio.png">
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ejercicios</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+							</div>
+						</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="controller/CTabla.php?action=principal">
+							<div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/table.png">
+                                    </div> 
+                                </div>
+                            </div>							                        
+                                <div class="panel-footer">
+                                    <span class="pull-left">Tablas</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div> 
+							</div>
+						</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="controller/CSesion.php?action=principal">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/sesion.png">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                <div class="panel-footer">
+                                    <span class="pull-left">Sesiones</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                        </div>
+					</a>
+                    </div>
+<?php
+        }
+        
+        if ($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4){
+?>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <a href="controller/CActividad2.php?action=principal">
+							<div class="panel panel-primary">
+                            <div class="panel-heading">
+                               <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/calendario.png">
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="panel-footer">
+                                    <span class="pull-left">Actividades</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+							</div>
+						</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="controller/CTabla.php?action=principal">
+							<div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/table.png">
+                                    </div> 
+                                </div>
+                            </div>							                        
+                                <div class="panel-footer">
+                                    <span class="pull-left">Tablas</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div> 
+							</div>
+						</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="controller/CSesion.php?action=principal">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/sesion.png">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                <div class="panel-footer">
+                                    <span class="pull-left">Sesiones</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                        </div>
+					</a>
+                    </div>
+<?php
+        }
+?>
+
 
            <!--      <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">

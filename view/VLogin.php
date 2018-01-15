@@ -33,11 +33,11 @@ class VLogin {
                 <form action="../controller/CLogin.php" method="post">
                     <div class="apartado">
                         <label for="dni">Usuario:</label>
-                        <input type="text" name="dni" size="9"/>
+                        <input type="text" name="dni" size="20"/>
                     </div>
                     <div class="apartado">
                         <label for="password">Password:</label>
-                        <input type="password" name="password" size="50"/>
+                        <input type="password" name="password" size="20"/>
                     </div>
                     <div class="apartado">
                         <button type="submit" name="action" value="comprobar">Enviar</button>
