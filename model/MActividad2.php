@@ -114,13 +114,13 @@ class MActividad2 {
     }
     
     function select(){
-        if($this->Sala==""){ //si se hace un select con campo vacio se entiende como un SHOWALL
+        if($this->Nombre==""){ //si se hace un select con campo vacio se entiende como un SHOWALL
             $sql="SELECT * FROM Actividad";
             $resultado=$this->mysqli->query($sql);
             return $resultado;
         }
         else{
-            $sql="SELECT * FROM Actividad WHERE Sala='$this->Sala'";
+            $sql="SELECT * FROM Actividad WHERE Nombre='$this->Nombre'";
             if(($resultado=$this->mysqli->query($sql))){
                 return $resultado;
             }
