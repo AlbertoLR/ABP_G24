@@ -13,6 +13,7 @@ include '../view/VAltaActividad2.php';
 include '../view/VBajaActividad2.php';
 include '../view/VModificarActividad2.php';
 include '../view/VConsultarActividad2.php';
+include '../view/VPrincipalActividad.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -95,6 +96,13 @@ estaRegistrado();
                 $respuesta=$Actividad->update();
                 new MESSAGE_View($respuesta,"../index.php");
             }
+            break;
+            
+        case 'principal':
+            $vista=new VPrincipalActividad();
+            if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
+            elseif($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4) $vista->vistaUsuario();
+            else header("location: ../index.php");
             break;
     }
     

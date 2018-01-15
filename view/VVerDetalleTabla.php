@@ -81,9 +81,7 @@ class VVerDetalleTabla {
 ?>
                     </tbody>
                </table>
-<?php
-        if($_SESSION['Id_PerfilUsuario']==2){
-?>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="../controller/CTabla.php?action=principal">
@@ -92,7 +90,6 @@ class VVerDetalleTabla {
                     </div>
                 </div>
 <?php
-        }
 	footer();
     }
 }

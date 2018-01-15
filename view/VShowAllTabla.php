@@ -68,6 +68,8 @@ class VShowAllTabla {
         }
         while(!is_null($tupla));
     }
+    
+    if ($_SESSION['Id_PerfilUsuario']==2){
 ?>
                     </tbody>
                </table>
@@ -79,6 +81,7 @@ class VShowAllTabla {
                     </div>
                 </div>
 <?php
+    }
 	footer();
     }
 }

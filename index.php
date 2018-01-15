@@ -30,10 +30,11 @@ estaRegistrado();
                 </div>
                 <!-- /.row -->
 <?php
-	if ($_SESSION['Id_PerfilUsuario']==1){ 
-             echo '<div class="row">
-             <div class="col-lg-3 col-md-6">
-                        <a href="controller/CActividad2.php?action=alta">
+	if ($_SESSION['Id_PerfilUsuario']==1){
+?>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                        <a href="controller/CActividad2.php?action=principal">
 							<div class="panel panel-primary">
                             <div class="panel-heading">
                                <div class="row">
@@ -51,7 +52,7 @@ estaRegistrado();
 						</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
-						<a href="controller/CUsuario.php?action=alta">
+						<a href="controller/CUsuario.php?action=principal">
 							<div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
@@ -69,7 +70,7 @@ estaRegistrado();
 						</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
-					<a href="controller/CRecurso.php?action=alta">
+					<a href="controller/CRecurso.php?action=principal">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
@@ -86,8 +87,11 @@ estaRegistrado();
                                 </div>
                         </div>
 					</a>
-                    </div>';
-} ?> 
+                    </div>
+<?php
+        }
+?>
+
            <!--      <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">

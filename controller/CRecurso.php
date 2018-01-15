@@ -14,6 +14,7 @@ include '../view/VAltaRecurso.php';
 include '../view/VBajaRecurso.php';
 include '../view/VModificarRecurso.php';
 include '../view/VConsultarRecurso.php';
+include '../view/VPrincipalRecurso.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -91,6 +92,12 @@ estaRegistrado();
                 $respuesta=$Recurso->update();
                 new MESSAGE_View($respuesta,"../index.php");
             }
+            break;
+            
+        case 'principal':
+            $vista=new VPrincipalRecurso();
+            if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
+            else header("location: ../index.php");
             break;
     }
     

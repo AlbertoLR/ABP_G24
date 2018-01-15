@@ -14,6 +14,7 @@ include '../view/VAltaUsuario.php';
 include '../view/VBajaUsuario.php';
 include '../view/VModificarUsuario.php';
 include '../view/VConsultarUsuario.php';
+include '../view/VPrincipalUsuario.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -91,6 +92,12 @@ estaRegistrado();
                 $respuesta=$Usuario->update();
                 new MESSAGE_View($respuesta,"../index.php");
             }
+            break;
+            
+        case 'principal':
+            $vista=new VPrincipalUsuario();
+            if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
+            else header("location: ../index.php");
             break;
     }
     
