@@ -61,13 +61,13 @@ estaRegistrado();
             break;
     
         case 'consulta':
-            if(!isset($_REQUEST['sala'])){
+            if(!isset($_REQUEST['Nombre'])){
                 new VConsultarActividad2(); 
             }
             else{
-                $Sala=$_REQUEST['sala'];
+                $Nombre=$_REQUEST['Nombre'];
 
-                $Actividad=new MActividad2("","",$Sala,"","","","");
+                $Actividad=new MActividad2("",$Nombre,"","","","","");
                 $resultado=$Actividad->select();
                 VConsultarActividad2::mostrar($resultado);
             }
