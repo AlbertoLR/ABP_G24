@@ -52,18 +52,21 @@ footer();
                 <h2>Formulario de busqueda:</h2>
                 <table class="table">
                     <thead>
+                        <tr>
                         <th>Nombre Actividad</th>
                         <th>Sala</th>
                         <th>Capadidad</th>
-                          <th>Hora inicio</th>
+                        <th>Hora inicio</th>
                         <th>Hora Fin</th>
                           <th>Dia</th>
+                          <th>Detalle</th>
                    
                     </tr>
                 </thead>
                 <tbody>
 <?php
         $tupla=$resultado->fetch_row();
+        if($tupla!=null){
         do{
             echo "<tr><td>$tupla[1]</td>";
             echo "<td>$tupla[2]</td>";
@@ -71,11 +74,17 @@ footer();
             echo "<td>$tupla[4]</td>";
              echo "<td>$tupla[5]</td>";
               echo "<td>$tupla[6]</td>";
+              echo " <td><a href='../controller/CActividad2.php?action=verDetalle&Id_Actividad=$tupla[0]' 
+              target='_blank'>
+                                <img src='../images/eye.png' width='4%' alt='showCurrent'/>
+                        </a></td>";
             
 
             $tupla=$resultado->fetch_row();
         }while(!is_null($tupla));
+    }
 ?>
+
     </tbody>
                 </table>
          

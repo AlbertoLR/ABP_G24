@@ -54,7 +54,7 @@ class VVerDetalleActividad {
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="../controller/CActividad2.php?action=principal">
-                            <img class="imagenes" src="../images/return.png" width="4%">
+                            <img class="imagenes" src="../images/return.png" width="2%">
                         </a>
                     </div>
                 </div>
