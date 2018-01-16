@@ -141,6 +141,20 @@ class MActividad2 {
         }
     }
     
+    function haySitio(){
+        $sql="SELECT Usuario_idUsuario FROM Inscripcion WHERE Actividad_idActividad='$this->Id_Actividad'";
+        $resultado= $this->mysqli->query($sql);
+        $numUsers=$resultado->num_rows;
+        $actividad=$this->selectID();
+        return $numUsers<$actividad[3];
+    }
+    
+    function registrarUser($idUsuario){
+        $sql = "INSERT INTO Inscripcion (Actividad_idActividad,Usuario_idUsuario) VALUES ('$this->Id_Actividad','$idUsuario')";
+        $this->mysqli->query($sql);
+        return "Inscripcion realizada con éxito";
+    }
+    
     public function __destruct(){
         desconexionBD($this->mysqli);
     }

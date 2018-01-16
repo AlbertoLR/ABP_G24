@@ -105,6 +105,15 @@ footer();
                                 <a href='../controller/CActividad2.php?action=verDetalle&Id_Actividad=<?=$tupla[0]?>' target='_blank'>
                                     <img src="../images/eye.png" width="2%" alt="showCurrent"/>
                                 </a>
+<?php
+                if($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4){
+?>
+                                <a href='../controller/CActividad2.php?action=registrarse&Id_Actividad=<?=$tupla[0]?>'>
+                                    <img src="../images/add.png" width="4%" alt="registrarse"/>
+                                </a>
+<?php
+                }
+?>
                             </td>
 <?php
                 $tupla=$resultado->fetch_row();

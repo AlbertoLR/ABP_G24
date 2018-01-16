@@ -121,6 +121,16 @@ estaRegistrado();
 
             VConsultarActividad2::mostrar($Actividades);
             break;
+        
+        case "registrarse":
+            $Id_Actividad=$_GET['Id_Actividad'];
+            
+            $modelo=new MActividad2($Id_Actividad,"","","","","","");
+            if($modelo->haySitio()){
+                $respuesta=$modelo->registrarUser($_SESSION['Id_usuario']);
+                new MESSAGE_View($respuesta,"../controller/CActividad2.php?action=principal");
+            }
+            break;
     }
     
 
