@@ -122,6 +122,14 @@ if (isset($_SESSION['Id_PerfilUsuario'])){
                                 <a href="../controller/CRecurso.php?action=consulta">Buscar Recurso</a>
                             </li>
                         </ul>
+                        <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#verperfil"><i class="verperfil"></i> Ver mi Perfil <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="verperfil" class="collapse">
+                           <li>
+                                <a href="../controller/CUsuario.php?action=verPerfil">Ver Perfil</a>
+                            </li>
+                           
+                            </ul>
                     </li>';
 	}	
     if($_SESSION['Id_PerfilUsuario']==2){
@@ -170,6 +178,14 @@ echo    '<li>
                             </li>
                             
                         </ul>
+                        <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#verperfil"><i class="verperfil"></i> Ver mi Perfil <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="verperfil" class="collapse">
+                           <li>
+                                <a href="../controller/CUsuario.php?action=verPerfil">Ver Perfil</a>
+                            </li>
+                           
+                            </ul>
                     </li>';
 
 
@@ -216,7 +232,7 @@ echo    '<li>
                     </li>
                             
                         </ul>
-<li>
+                        <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#verperfil"><i class="verperfil"></i> Ver mi Perfil <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="verperfil" class="collapse">
                            <li>
