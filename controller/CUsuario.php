@@ -27,10 +27,14 @@ estaRegistrado();
             }
             else{
                 $Nombre=$_REQUEST['nombreUs'];
+                $Apellido=$_REQUEST['Apellido'];
                 $DNI=$_REQUEST['DNIUs'];
+                $Telefono=$_REQUEST['Telefono'];
                 $Id_PerfilUsuario=$_REQUEST['Id_PerfilUsuario'];
 
-                $Usuario=new MUsuario("",$Nombre,$DNI,$Id_PerfilUsuario);
+
+
+                $Usuario=new MUsuario("",$Nombre,$Apellido,$DNI,$Telefono,$Id_PerfilUsuario,"cambiame");
                 $respuesta=$Usuario->insert();
                 new MESSAGE_View($respuesta, "../index.php");
             }
@@ -38,13 +42,13 @@ estaRegistrado();
     
         case 'baja':
             if(!isset($_REQUEST['Id_usuario'])){
-                $selectAll=new MUsuario("","","","");
+                $selectAll=new MUsuario("","","","","","","");
                 $listaUsuarios=$selectAll->select();
                 new VBajaUsuario($listaUsuarios);
             }
             elseif(!isset($_REQUEST['confirmar'])) {
                 $Id_usuario=$_REQUEST['Id_usuario'];
-                $modelo=new MUsuario($Id_usuario,"","","");
+                $modelo=new MUsuario($Id_usuario,"","","","","","");
                 $UsuarioBorrar=$modelo->selectID();
                 VBajaUsuario::solicitarConfirmacion($UsuarioBorrar);
             }
@@ -52,7 +56,7 @@ estaRegistrado();
                 if($_REQUEST['confirmar']=="si"){ //si el usuario confirma q quiere borrar el Us
                     $Id_usuario=$_REQUEST['Id_usuario'];
 
-                    $Usuario=new MUsuario($Id_usuario,"","","");
+                    $Usuario=new MUsuario($Id_usuario,"","","","","","");
                     $respuesta=$Usuario->delete();
                     new MESSAGE_View($respuesta, "../index.php");
                 }
@@ -66,7 +70,7 @@ estaRegistrado();
             else{
                 $DNI=$_REQUEST['DNIUs'];
 
-                $Usuario=new MUsuario("","",$DNI,"");
+                $Usuario=new MUsuario("","","",$DNI,"","","");
                 $resultado=$Usuario->select();
                 VConsultarUsuario::mostrar($resultado);
             }
@@ -74,21 +78,22 @@ estaRegistrado();
     
         case 'modificacion':
             if(!isset($_REQUEST['Id_usuario'])){
-                $selectAll=new MUsuario("","","","");
+                $selectAll=new MUsuario("","","","","","","");
                 $listaUsuarios=$selectAll->select();
                 new VModificarUsuario($listaUsuarios); //asi conseguimos la id del Usuario a modificar 
             }
-            elseif (!isset($_REQUEST['nombreUs']) && !isset($_REQUEST['DNIUs']) && !isset($_REQUEST['Id_PerfilUsuario'])) {
+            elseif (!isset($_REQUEST['nombreUs']) && !isset($_REQUEST['Apellido']) && !isset($_REQUEST['DNIUs']) && !isset($_REQUEST['Telefono']) &&!isset($_REQUEST['Id_PerfilUsuario'])) {
                 $Id_usuario=$_REQUEST['Id_usuario'];
                 VModificarUsuario::mostrarFormulario($Id_usuario); //luego se envia a un formulario para editar
             }
             else{
-                $Id_usuario=$_REQUEST['Id_usuario'];
                 $Nombre=$_REQUEST['nombreUs'];
+                $Apellido=$_REQUEST['Apellido'];
                 $DNI=$_REQUEST['DNIUs'];
+                $Telefono=$_REQUEST['Telefono'];
                 $Id_PerfilUsuario=$_REQUEST['Id_PerfilUsuario'];
 
-                $Usuario=new MUsuario($Id_usuario,$Nombre,$DNI,$Id_PerfilUsuario);
+                $Usuario=new MUsuario($Id_usuario,$Nombre,$Apellido,$DNI,$Telefono,$Id_PerfilUsuario);
                 $respuesta=$Usuario->update();
                 new MESSAGE_View($respuesta,"../index.php");
             }
