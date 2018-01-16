@@ -111,8 +111,9 @@ estaRegistrado();
 
             $modelo=new MActividad2($Id_Actividad,"","","","","","");
             $Actividad=$modelo->selectID();
+            $usuarios=$modelo->usersInscritos();
 
-            new VVerDetalleActividad($Actividad);
+            new VVerDetalleActividad($Actividad,$usuarios);
             break;
         
         case "verActividad":
@@ -131,7 +132,14 @@ estaRegistrado();
                 new MESSAGE_View($respuesta,"../controller/CActividad2.php?action=principal");
             }
             break;
+            
+        case "desinscribirse":
+            $Id_Actividad=$_GET['idActividad'];
+            $idUser=$_GET['idUser'];
+            
+            $modelo=new MActividad2($Id_Actividad,"","","","","","");
+            $respuesta=$modelo->eliminarUser($idUser);
+            new MESSAGE_View($respuesta,"../controller/CActividad2.php?action=principal");
+            break;
     }
-    
-
 ?>

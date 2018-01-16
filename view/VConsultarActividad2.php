@@ -109,7 +109,7 @@ footer();
                 if($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4){
 ?>
                                 <a href='../controller/CActividad2.php?action=registrarse&Id_Actividad=<?=$tupla[0]?>'>
-                                    <img src="../images/add.png" width="4%" alt="registrarse"/>
+                                    <img src="../images/add.png" width="2%" alt="registrarse"/>
                                 </a>
 <?php
                 }

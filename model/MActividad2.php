@@ -158,5 +158,21 @@ class MActividad2 {
     public function __destruct(){
         desconexionBD($this->mysqli);
     }
+    
+    function usersInscritos(){
+        $sql="SELECT Usuario.Id_usuario,Usuario.Nombre,Usuario.Apellido FROM Inscripcion,Usuario WHERE Usuario.Id_usuario=Inscripcion.Usuario_idUsuario AND Inscripcion.Actividad_idActividad='$this->Id_Actividad'";
+        if(($resultado=$this->mysqli->query($sql))){
+            return $resultado;
+        }
+        else{
+            return "La busqueda no ha devuelto resultado";
+        }
+    }
+    
+    function eliminarUser($idUser){
+        $sql = "DELETE FROM Inscripcion WHERE Actividad_idActividad='$this->Id_Actividad' AND Usuario_idUsuario='$idUser'";
+        $this->mysqli->query($sql);
+        return "Borrado correctamente";
+    }
 }
 ?>
