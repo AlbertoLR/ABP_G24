@@ -14,6 +14,7 @@ include '../view/VBajaActividad2.php';
 include '../view/VModificarActividad2.php';
 include '../view/VConsultarActividad2.php';
 include '../view/VVerDetalleActividad.php';
+include '../view/VPrincipalActividad.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -98,27 +99,29 @@ estaRegistrado();
             }
             break;
             
-             case 'principal':
+        case 'principal':
             $vista=new VPrincipalActividad();
             if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
             elseif($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4) $vista->vistaUsuario();
             else header("location: ../index.php");
             break;
 
-            case "verDetalle":
-        $Id_Actividad=$_GET['Id_Actividad'];
+        case "verDetalle":
+            $Id_Actividad=$_GET['Id_Actividad'];
+
+            $modelo=new MActividad2($Id_Actividad,"","","","","","");
+            $Actividad=$modelo->selectID();
+
+            new VVerDetalleActividad($Actividad);
+            break;
         
-        $modelo=new MActividad2($Id_Actividad,"","","","","","");
-        $Actividad=$modelo->selectID();
-        
-        
-        new VVerDetalleActividad($Actividad);
-        break;
+        case "verActividad":
+            $modelo=new MActividad2("","","","","","","");
+            $Actividades=$modelo->select();
+
+            VConsultarActividad2::mostrar($Actividades);
+            break;
     }
     
-//    private function showAllActividad(){
-//        $Actividad=new MActividad("","","");
-//        return $Actividad->select();
-//    }
-//}
+
 ?>

@@ -46,47 +46,81 @@ footer();
     }
     
     static function mostrar($resultado){
-      menus();
+        menus();
 ?>
         
-                <h2>Formulario de busqueda:</h2>
+        <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Listado de actividades
+                        </h1>
+                    </div>
+                </div>
+                
                 <table class="table">
                     <thead>
                         <tr>
-                        <th>Nombre Actividad</th>
-                        <th>Sala</th>
-                        <th>Capadidad</th>
-                        <th>Hora inicio</th>
-                        <th>Hora Fin</th>
-                          <th>Dia</th>
-                          <th>Detalle</th>
-                   
-                    </tr>
-                </thead>
-                <tbody>
+                            <th>Nombre Actividad</th>
+                            <th>Sala</th>
+                            <th>Capadidad</th>
+                            <th>Hora inicio</th>
+                            <th>Hora Fin</th>
+                            <th>Dia</th>
+<?php
+        if($_SESSION['Id_PerfilUsuario']==1){
+?>
+                            <th>Recurso</th>
+<?php
+        }
+?>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 <?php
         $tupla=$resultado->fetch_row();
         if($tupla!=null){
-        do{
-            echo "<tr><td>$tupla[1]</td>";
-            echo "<td>$tupla[2]</td>";
-             echo "<td>$tupla[3]</td>";
-            echo "<td>$tupla[4]</td>";
-             echo "<td>$tupla[5]</td>";
-              echo "<td>$tupla[6]</td>";
-              echo " <td><a href='../controller/CActividad2.php?action=verDetalle&Id_Actividad=$tupla[0]' 
-              target='_blank'>
-                                <img src='../images/eye.png' width='4%' alt='showCurrent'/>
-                        </a></td>";
-            
-
-            $tupla=$resultado->fetch_row();
-        }while(!is_null($tupla));
-    }
+            do{
 ?>
-
-    </tbody>
+                        <tr>
+                            <td><?=$tupla[1]?></td>
+                            <td><?=$tupla[2]?></td>
+                            <td><?=$tupla[3]?></td>
+                            <td><?=$tupla[4]?></td>
+                            <td><?=$tupla[5]?></td>
+                            <td><?=$tupla[6]?></td>
+<?php
+                if($_SESSION['Id_PerfilUsuario']==1){
+?>
+                            <td><?=$tupla[8]?></td>
+<?php
+                }
+?>
+                            <td>
+                                <a href='../controller/CActividad2.php?action=verDetalle&Id_Actividad=<?=$tupla[0]?>' target='_blank'>
+                                    <img src="../images/eye.png" width="2%" alt="showCurrent"/>
+                                </a>
+                            </td>
+<?php
+                $tupla=$resultado->fetch_row();
+            }while(!is_null($tupla));
+        }
+?>
+                    </tbody>
                 </table>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CActividad2.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+                </div>
          
 <?php
  footer();

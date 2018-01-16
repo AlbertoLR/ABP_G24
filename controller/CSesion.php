@@ -194,7 +194,7 @@ switch ($_REQUEST['action']){
             
             new VShowAllSesion($sesiones,"Sesiones de usuario");
         }
-        if($_SESSION['Id_PerfilUsuario']==2){
+        elseif($_SESSION['Id_PerfilUsuario']==2){
             if($_GET['tipo']=='pef') $idPerfil=3;
             elseif($_GET['tipo']=='normales') $idPerfil=4;
             
