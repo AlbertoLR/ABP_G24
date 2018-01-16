@@ -15,6 +15,8 @@ include '../view/VBajaUsuario.php';
 include '../view/VModificarUsuario.php';
 include '../view/VConsultarUsuario.php';
 include '../view/VPrincipalUsuario.php';
+include '../view/VVerPerfilUser.php';
+include '../view/VCambiarPass.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -104,11 +106,29 @@ estaRegistrado();
             if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
             else header("location: ../index.php");
             break;
+        
+        case 'verPerfil': 
+            $modelo=new MUsuario($_SESSION['Id_usuario'],"","","","","",""); 
+            $user=$modelo->selectID(); 
+       
+            new VVerPerfilUser($user); 
+            break;
+        
+        case 'cambiarPass':
+            if(!isset($_REQUEST['password'])){
+                $idUser=$_GET['idUser'];
+
+                new VCambiarPass($idUser);
+            }
+            else{
+                $Id_usuario=$_POST['idUser'];
+                $password=$_POST['password'];
+                
+                $modelo=new MUsuario($Id_usuario,"","","","","",$password);
+                $respuesta=$modelo->cambiarPass();
+                
+                new MESSAGE_View($respuesta,"../controller/CUsuario.php?action=verPerfil");
+            }
+            break;
     }
-    
-//    private function showAllUsuario(){
-//        $Usuario=new MUsuario("","","");
-//        return $Usuario->select();
-//    }
-//}
 ?>

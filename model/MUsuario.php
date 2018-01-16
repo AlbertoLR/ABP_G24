@@ -147,5 +147,18 @@ class MUsuario {
     public function __destruct(){
         desconexionBD($this->mysqli);
     }
+    
+    function cambiarPass(){
+        $sql="SELECT * FROM Usuario WHERE Id_usuario='$this->Id_usuario'";
+        $resultado= $this->mysqli->query($sql);
+        if ($resultado->num_rows==1) { //si encuentra la tupla a editar
+            $sql = "UPDATE Usuario SET password='$this->password' WHERE Id_usuario=$this->Id_usuario";
+            $this->mysqli->query($sql);
+            return "Modificado correctamente";
+        }
+        else{
+            return "No se encuentra el Usuario";
+        }
+    }
 }
 ?>

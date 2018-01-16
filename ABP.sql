@@ -371,9 +371,9 @@ insert into `PerfilUsuario` (`Id_PerfilUsuario`, `Tipo`) values
 INSERT INTO `Usuario` (`Id_usuario`, `Nombre`, `Apellido`, `DNI`, `Telefono`, `Id_PerfilUsuario`, `password`, `Id_entrenador`) VALUES
 (1, 'Alberto', 'Lopez Rodriguez', '44488826H', 666123456, 1, 'cambiame', NULL),
 (2, 'Samuel', 'Gonzalez Veloso', '46573898J', 666987654, 2, 'cambiame', NULL),
-(3, 'Iago', 'Novoa Gonzalez', '12345678K', 988123456, 4, 'cambiame', 2),
-(4, 'Amparo', 'Lopez Lopez', '87654321J', 988987654, 4, 'cambiame', 2),
-(5, 'Pedro', 'Martinez Morales', '35581709V', 600123456, 3, 'cambiame', NULL),
+(3, 'Iago', 'Novoa Gonzalez', '12345678K', 988123456, 3, 'cambiame', 2),
+(4, 'Amparo', 'Lopez Lopez', '87654321J', 988987654, 3, 'cambiame', 2),
+(5, 'Pedro', 'Martinez Morales', '35581709V', 600123456, 4, 'cambiame', NULL),
 (6, 'Ana', 'Suarez Suarez', '45454545B', 600654321, 2, 'cambiame', NULL);
 
 --
