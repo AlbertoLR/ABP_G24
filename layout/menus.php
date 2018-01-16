@@ -123,7 +123,117 @@ if (isset($_SESSION['Id_PerfilUsuario'])){
                             </li>
                         </ul>
                     </li>';
-	}					
+	}	
+    if($_SESSION['Id_PerfilUsuario']==2){
+    
+echo    '<li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#ejercicio"><i class="ejercicio"></i> Ejercicios <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="ejercicio" class="collapse">
+                            <li>
+                                <a href="../controller/CEjercicio.php?action=alta" >Añadir ejercicio</a>
+                            </li>
+                            <li>
+                                <a href="../controller/CEjercicio.php?action=consulta">Buscar Ejercicio</a>
+                            </li>
+                            <li>
+                                <a href="../controller/CEjercicio.php?action=verEjercicio">Ver Ejercicio</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#tabla"><i class="tabla"></i> Tablas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="tabla" class="collapse">
+                            <li>
+                                <a href="../controller/CTabla.php?action=alta" >Crear/Asignar Tabla</a>
+                            </li>
+                            <li>
+                                <a href="../controller/CTabla.php?action=consulta">Buscar Tabla Actividad</a>
+                            </li>
+                            <li>
+                                <a href="../controller/CTabla.php?action=verTabla">Ver Tablas</a>
+                            </li>
+                            <li>
+                                <a href="../controller/CTabla.php?action=verAsignacion">Ver Asignacion Tablas</a>
+                            </li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#sesion"><i class="sesion"></i> Sesiones <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="sesion" class="collapse">
+                            <li>
+                                <a href="../controller/CSesion.php?action=cargarVerSesion">Ver Sesiones</a>
+                            </li>
+                        
+                            <li>
+                                <a href="../controller/CSesion.php?action=consulta">Buscar Sesiones</a>
+                            </li>
+                            
+                        </ul>
+                    </li>';
+
+
+    }
+    
+if($_SESSION['Id_PerfilUsuario']==3 || $_SESSION['Id_PerfilUsuario']==4 ){
+    
+echo    '<li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#actividad"><i class="actividad"></i> Actividades <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="actividad" class="collapse">
+                            <li>
+                                <a href="../controller/CActividad2.php?action=consulta">Buscar Actividad</a>
+                            </li>
+                           <li>
+                                <a href="../controller/CActividad2.php?action=verActividad" >Ver Actividad</a>
+                            </li>
+                            
+                           
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#tabla"><i class="tabla"></i> Tablas <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="tabla" class="collapse">
+                           <li>
+                                <a href="../controller/CTabla.php?action=principal">Ver Tablas</a>
+                            </li>
+                           
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#sesion"><i class="sesion"></i> Sesiones <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="sesion" class="collapse">
+                        <li>
+                                <a href="../controller/CSesion.php?action=cargarAlta">Iniciar Sesion</a>
+                            </li>
+                        
+                            <li>
+                                <a href="../controller/CSesion.php?action=consulta">Buscar Sesiones</a>
+                            </li>
+                            <li>
+                                <a href="../controller/CSesion.php?action=verSesion">Ver Sesiones</a>
+                            </li>
+                        
+                    </li>
+                            
+                        </ul>
+<li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#verperfil"><i class="verperfil"></i> Ver mi Perfil <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="verperfil" class="collapse">
+                           <li>
+                                <a href="../controller/CUsuario.php?action=verPerfil">Ver Perfil</a>
+                            </li>
+                           
+                            </ul>
+                    </li>'
+                    ;
+
+
+    }
+    
+
+
+    
+
 }   
 	   
 	   echo      '</ul>
