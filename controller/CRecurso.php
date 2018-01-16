@@ -9,12 +9,11 @@ session_start();
 
 //incluidos todas las vistas y el modelo de Recurso
 include '../model/MRecurso.php';
-include '../model/MActividad2.php';
+//include '../model/MActividad2.php';
 include '../view/VAltaRecurso.php';
 include '../view/VBajaRecurso.php';
 include '../view/VModificarRecurso.php';
 include '../view/VConsultarRecurso.php';
-include '../view/VPrincipalRecurso.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -22,11 +21,11 @@ estaRegistrado();
 
     Switch ($_REQUEST['action']){
         case 'alta':
-            if(!isset($_REQUEST['nombreRec'])){
+            if(!isset($_REQUEST['Nombre'])){
                 new VAltaRecurso();
             }
             else{
-                $Nombre=$_REQUEST['nombreRec'];
+                $Nombre=$_REQUEST['Nombre'];
                 $Capacidad=$_REQUEST['Capacidad'];
                 
 
@@ -64,7 +63,7 @@ estaRegistrado();
                 new VConsultarRecurso(); //psa
             }
             else{
-                $Capacidad=$_REQUEST['Nombre'];
+                $Nombre=$_REQUEST['Nombre'];
 
                 $Recurso=new MRecurso("",$Nombre,"");
                 $resultado=$Recurso->select();
@@ -78,13 +77,13 @@ estaRegistrado();
                 $listaRecursos=$selectAll->select();
                 new VModificarRecurso($listaRecursos); //asi conseguimos la id del Recurso a modificar 
             }
-            elseif (!isset($_REQUEST['nombreRec']) && !isset($_REQUEST['Capacidad'])) {
+            elseif (!isset($_REQUEST['Nombre']) && !isset($_REQUEST['Capacidad'])) {
                 $Id_Recurso=$_REQUEST['Id_Recurso'];
                 VModificarRecurso::mostrarFormulario($Id_Recurso); //luego se envia a un formulario para editar
             }
             else{
                 $Id_Recurso=$_REQUEST['Id_Recurso'];
-                $Nombre=$_REQUEST['nombreRec'];
+                $Nombre=$_REQUEST['Nombre'];
                 $Capacidad=$_REQUEST['Capacidad'];
                
 
@@ -92,12 +91,6 @@ estaRegistrado();
                 $respuesta=$Recurso->update();
                 new MESSAGE_View($respuesta,"../index.php");
             }
-            break;
-            
-        case 'principal':
-            $vista=new VPrincipalRecurso();
-            if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
-            else header("location: ../index.php");
             break;
     }
     
