@@ -54,7 +54,7 @@ footer();
             <head></head>
             <body>
                 <h2>¿Desea borrar este Recurso?</h2>
-                <table>
+                <table class="table">
                     <tr>
                         <td>Id del Recurso:</td>
 <?php

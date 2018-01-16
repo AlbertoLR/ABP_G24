@@ -46,14 +46,12 @@ footer();
     static function mostrar($resultado){
         menus();
 ?>
-        <html>
-            <head></head>
-            <body>
+        
                 <h2>Formulario de busqueda:</h2>
-                <table>
+                <table class="table">
                     <tr>
-                        <td>Nombre Recurso</td>
-                        <td>Capacidad</td>
+                        <th>Nombre Recurso</th>
+                        <th>Capacidad</th>
                     </tr>
 <?php
         $tupla=$resultado->fetch_row();
@@ -64,8 +62,13 @@ footer();
         }while(!is_null($tupla));
 ?>
                 </table>
-            </body>
-        </html>
+      <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../controller/CRecurso.php?action=principal">
+                            <img class="imagenes" src="../images/return.png" width="4%">
+                        </a>
+                    </div>
+           
 <?php
 footer();
     }
