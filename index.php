@@ -210,6 +210,24 @@ estaRegistrado();
                         </div>
 					</a>
                     </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="controller/CUsuario.php?action=verPerfil">
+							<div class="panel panel-primary">
+                            <div class="panel-heading">
+                               <div class="row">
+                                    <div class="col-xs-3">
+                                        <img class="imagenes" src="/images/user.png">
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver mi perfil</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+							</div>
+						</a>
+                    </div>
 <?php
         }
 ?>
