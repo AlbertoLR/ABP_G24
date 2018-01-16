@@ -17,6 +17,7 @@ include '../view/VConsultarUsuario.php';
 include '../view/VPrincipalUsuario.php';
 include '../view/VVerPerfilUser.php';
 include '../view/VCambiarPass.php';
+include '../view/VAsignarEntrenador.php';
 include '../view/MESSAGE_View.php';
 include "../core/Login.php";
 
@@ -24,21 +25,28 @@ estaRegistrado();
 
     Switch ($_REQUEST['action']){
         case 'alta':
-            if(!isset($_REQUEST['nombreUs'])){
+            if(!isset($_POST['nombreUs'])){
                 new VAltaUsuario();
             }
             else{
-                $Nombre=$_REQUEST['nombreUs'];
-                $Apellido=$_REQUEST['Apellido'];
-                $DNI=$_REQUEST['DNIUs'];
-                $Telefono=$_REQUEST['Telefono'];
-                $Id_PerfilUsuario=$_REQUEST['Id_PerfilUsuario'];
-
-
+                $Nombre=$_POST['nombreUs'];
+                $Apellido=$_POST['Apellido'];
+                $DNI=$_POST['DNIUs'];
+                $Telefono=$_POST['Telefono'];
+                $Id_PerfilUsuario=$_POST['Id_PerfilUsuario'];
 
                 $Usuario=new MUsuario("",$Nombre,$Apellido,$DNI,$Telefono,$Id_PerfilUsuario,"cambiame");
                 $respuesta=$Usuario->insert();
-                new MESSAGE_View($respuesta, "../index.php");
+                
+                if($Id_PerfilUsuario=3){
+                    $modelo=new MUsuario("","","",$DNI,"","","");
+                    $user=$modelo->selectDNI();
+                    $idUser=$user[0];
+                    
+                    header("location: CUsuario.php?action=asignarEntrenador&idUser=$idUser");
+                }
+                
+                new MESSAGE_View($respuesta, "../controller/CUsuario.php?action=principal");
             }
             break;
     
@@ -60,7 +68,7 @@ estaRegistrado();
 
                     $Usuario=new MUsuario($Id_usuario,"","","","","","");
                     $respuesta=$Usuario->delete();
-                    new MESSAGE_View($respuesta, "../index.php");
+                    new MESSAGE_View($respuesta, "../controller/CUsuario.php?action=principal");
                 }
             }
             break;
@@ -97,7 +105,7 @@ estaRegistrado();
 
                 $Usuario=new MUsuario($Id_usuario,$Nombre,$Apellido,$DNI,$Telefono,$Id_PerfilUsuario);
                 $respuesta=$Usuario->update();
-                new MESSAGE_View($respuesta,"../index.php");
+                new MESSAGE_View($respuesta,"../controller/CUsuario.php?action=principal");
             }
             break;
             
@@ -105,6 +113,13 @@ estaRegistrado();
             $vista=new VPrincipalUsuario();
             if($_SESSION['Id_PerfilUsuario']==1) $vista->vistaAdministrador();
             else header("location: ../index.php");
+            break;
+			
+		case 'verPerfil':
+            $modelo=new MUsuario($_SESSION['Id_usuario'],"","","","","","");
+			$user=$modelo->selectID();
+			
+            new VVerPerfilUser($user);
             break;
         
         case 'verPerfil': 
@@ -128,6 +143,31 @@ estaRegistrado();
                 $respuesta=$modelo->cambiarPass();
                 
                 new MESSAGE_View($respuesta,"../controller/CUsuario.php?action=verPerfil");
+            }
+            break;
+            
+        case 'asignarEntrenador':
+            if(!isset($_POST['idEntrenador'])){
+                $idUser=$_GET['idUser'];
+
+                $modelo=new MUsuario($idUser,"","","","","",""); 
+                $user=$modelo->selectID(); 
+
+                if($user[5]==3){
+                    $entrenadores=$modelo->entrenadores();
+
+                    new VAsignarEntrenador($idUser,$entrenadores);
+                }
+                else new MESSAGE_View("No es un deportista PEF","../index.php");
+            }
+            else{
+                $Id_usuario=$_POST['idUser'];
+                $idEntrenador=$_POST['idEntrenador'];
+                
+                $modelo=new MUsuario($Id_usuario,"","","","","","");
+                $respuesta=$modelo->asignarEntrenador($idEntrenador);
+                
+                new MESSAGE_View($respuesta,"../controller/CUsuario.php?action=principal");
             }
             break;
     }

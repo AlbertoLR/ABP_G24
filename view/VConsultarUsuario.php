@@ -54,6 +54,7 @@ footer();
                         <th>Apellido</th>
                         <th>DNI Usuario</th>
                         <th>Telefono</th>
+                        <th>Acciones</th>
                     </tr>
 <?php
         $tupla=$resultado->fetch_row();
@@ -61,7 +62,8 @@ footer();
             echo "<tr><td>$tupla[1]</td>";
             echo "<td>$tupla[2]</td>";
             echo "<td>$tupla[3]</td>";
-            echo "<td>$tupla[4]</td></tr>";
+            echo "<td>$tupla[4]</td>";
+            echo "<td><a href='../controller/CUsuario.php?action=asignarEntrenador&idUser=$tupla[0]' aria-label='Edit'><img src='../images/ejercicio.png' width='4%' alt='edit'/></a></td></tr>";
             $tupla=$resultado->fetch_row();
         }while(!is_null($tupla));
 ?>
