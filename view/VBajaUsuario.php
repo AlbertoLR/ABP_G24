@@ -10,10 +10,20 @@ class VBajaUsuario{
         $this->render($listaUsuarios);
     }
       function render($listaUsuarios){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
+       <div id="page-wrapper">
+        
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Borrar Usuario <small>Elige Usuario</small>
+                        </h1>
+                    </div>
+                </div>
                 <h2>Seleccione el Usuario a borrar:</h2>
                 <form action="../controller/CUsuario.php" method="post">
                     <div>
@@ -31,23 +41,21 @@ class VBajaUsuario{
                         <button type="submit" name="action" value="baja">Enviar</button>
                     </div>
                 </form>
-            </body>
-        </html>
-
+          
 <?php
+footer();
     }
     
     static function solicitarConfirmacion($UsuarioBorrar){
+        menus();
 ?>
-        <html>
-            <head></head>
-            <body>
+        
                 <h2>¿Desea borrar este Usuario?</h2>
-                <table>
+                <table class="table">
                     <tr>
-                        <td>Id del Usuario:</td>
+                        <td>DNI Usuario:</td>
 <?php
-        echo "<td>$UsuarioBorrar[0]</td>";
+        echo "<td>$UsuarioBorrar[3]</td>";
 ?>
                     </tr>
                     <tr>
@@ -57,7 +65,7 @@ class VBajaUsuario{
 ?>
                     </tr>
                     <tr>
-                        <td>Descripcion del Usuario:</td>
+                        <td>Apellido del Usuario:</td>
 <?php
         echo "<td>$UsuarioBorrar[2]</td>";
 ?>
@@ -67,18 +75,19 @@ class VBajaUsuario{
                 <form action="../controller/CUsuario.php" method="POST">
 <?php
         echo "<input type='hidden' name='Id_usuario' value='$UsuarioBorrar[0]'/>";
-        echo "<input type='hidden' name='nombreUs' value='$UsuarioBorrar[1]'/>";
-        echo "<input type='hidden' name='DNIUs' value='$UsuarioBorrar[2]'/>";
+        
+
         echo "<input type='hidden' name='action' value='baja'/>";
 ?>
-                    <div>
+                    <div><center>
                         <button type="submit" name="confirmar" value="si">Si</button>
                         <button type="submit" name="confirmar" value="no">No</button>
+                        </center>
                     </div>
                 </form>
-            </body>
-        </html>
+          
 <?php
+footer();
     }
 }
 ?>
